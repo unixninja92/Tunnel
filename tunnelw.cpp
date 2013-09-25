@@ -32,5 +32,5 @@ void TunnelW::drawDot()
 
 void TunnelW::keyPressEvent(QKeyEvent *event)
 {
-    if(event)
+    
 }
