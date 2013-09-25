@@ -17,6 +17,7 @@ public:
     ~TunnelW();
     void drawDot();
     void keyPressEvent(QKeyEvent *);
+    void keyReleaseEvent(QKeyEvent *);
 
 
 private:
