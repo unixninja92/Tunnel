@@ -13,8 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        tunnelw.cpp
+        tunnelw.cpp \
+    movingpolygons.cpp \
+    polygonarray.cpp
 
-HEADERS  += tunnelw.h
+HEADERS  += tunnelw.h \
+    movingpolygons.h \
+    polygonarray.h
 
 FORMS    += tunnelw.ui
