@@ -1,5 +1,5 @@
 /*
- *Copyright 2013 unixninja92
+ *  Copyright 2013 unixninja92
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,6 +16,9 @@
 #include "movingpolygons.h"
 #include <QVector>
 #include <QTime>
+#include <QString>
+#include <sstream>
+
 
 
 MovingPolygons::MovingPolygons(QGraphicsScene* s, QGraphicsEllipseItem* d, QObject *parent) :
@@ -33,7 +36,14 @@ MovingPolygons::MovingPolygons(QGraphicsScene* s, QGraphicsEllipseItem* d, QObje
         array->set(generateStraightCenterPolyBlock(i-1), i);
     }
     count = 0;
-    timer = startTimer(40);
+    wallTimer = startTimer(40);
+    scoreTimer = startTimer(1000);
+    score = 0;
+    scoreKeeper = scene->addSimpleText(" ");
+    scoreKeeper->setPos(sceneWidth-30, 30);
+    scoreKeeper->setBrush(Qt::white);
+    scoreKeeper->setZValue(1);
+    updateScore();
     qsrand(time(NULL));
 }
 
@@ -128,17 +138,31 @@ void MovingPolygons::rotate()
 
 void MovingPolygons::timerEvent(QTimerEvent *event)
 {
-    for(int i = 0; i<size; i++){
-        array->get(i).left->moveBy(0,1);
-        array->get(i).right->moveBy(0,1);
+    if(event->timerId()==wallTimer){
+        for(int i = 0; i<size; i++){
+            array->get(i).left->moveBy(0,1);
+            array->get(i).right->moveBy(0,1);
+        }
+        count++;
+        if(count%75==0) rotate();
     }
-    count++;
-    if(count%75==0) rotate();
+    else if(event->timerId()==scoreTimer){
+        score++;
+        updateScore();
+    }
 }
 
 void MovingPolygons::killTime()
 {
-    killTimer(timer);
+    killTimer(wallTimer);
+    killTimer(scoreTimer);
+}
+
+void MovingPolygons::updateScore()
+{
+    std::stringstream out;
+    out << score;
+    scoreKeeper->setText(QString::fromStdString(out.str()));
 }
 
 int MovingPolygons::getSize()

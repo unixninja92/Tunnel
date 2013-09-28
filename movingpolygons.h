@@ -1,5 +1,5 @@
 /*
- *Copyright 2013 unixninja92
+ *  Copyright 2013 unixninja92
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@
 #include <QPolygonF>
 #include <QTimer>
 #include <QTimerEvent>
+#include <QGraphicsSimpleTextItem>
 #include "polygonarray.h"
 
 #define TUNNEL_WIDTH 150
@@ -39,6 +40,7 @@ public:
     void rotate();
     int getSize();
     void killTime();
+    void updateScore();
 protected:
     void timerEvent(QTimerEvent *event);
 private:
@@ -51,7 +53,10 @@ private:
     int size;
     bool color;
     int count;
-    int timer;
+    int wallTimer;
+    int scoreTimer;
+    int score;
+    QGraphicsSimpleTextItem* scoreKeeper;
     qreal lastBlockTopLeft;
     polygonBlock generatePolygonBlock(QPolygonF, QPolygonF);
 };
