@@ -71,10 +71,9 @@ Dot::Dot(share s, QWidget *parent) :
     dot = shared.scene->addEllipse(shared.scene->width()/2-10,
                             ((shared.walls->getSize() - 4)*POLYGON_HEIGHT)-POLYGON_HEIGHT/2-10,
                             20, 20, QPen(Qt::blue),QBrush(Qt::blue));
-    dot->grabKeyboard();
     left = false;
     right = false;
-    timer = startTimer(10);
+    timer = startTimer(20);
 }
 
 void Dot::keyPressEvent(QKeyEvent *event)
@@ -259,7 +258,7 @@ Score::Score(share s, QObject *parent) :
     shared = s;
     score = 0;
     scoreKeeper = shared.scene->addSimpleText(" ");
-    scoreKeeper->setPos(shared.scene->width()-30, 30);
+    scoreKeeper->setPos(shared.scene->width()-30, 20);
     scoreKeeper->setBrush(Qt::white);
     scoreKeeper->setZValue(1);
     updateScore();
@@ -289,4 +288,11 @@ void Score::killTime()
 int Score::getScore()
 {
     return score;
+}
+
+EndScreen::EndScreen(share s, QWidget *parent) :
+    QWidget(parent)
+{
+    shared = s;
+
 }

@@ -134,4 +134,14 @@ private:
     int scoreTimer;
 };
 
+class EndScreen : public QWidget
+{
+    Q_OBJECT
+public:
+    explicit EndScreen(share, QWidget *parent=0);
+
+private:
+    share shared;
+};
+
 #endif // TUNNELW_H
