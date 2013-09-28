@@ -48,6 +48,7 @@ void TunnelW::createScene(int w, int h)
 void TunnelW::startGame()
 {
     shared.walls = new MovingPolygons(shared);
+    shared.score = new Score(shared);
     shared.dot = new Dot(shared, this);
 //    qDebug() << "HI!!";
 }
@@ -106,6 +107,7 @@ void Dot::timerEvent(QTimerEvent *event)
             dot->collidesWithItem(shared.walls->getNextBlock().right)) {
         killTimer(timer);
         shared.walls->killTime();
+        shared.score->killTime();
     }
 }
 
@@ -125,13 +127,6 @@ MovingPolygons::MovingPolygons(share s, QObject *parent) :
     }
     count = 0;
     wallTimer = startTimer(40);
-    scoreTimer = startTimer(1000);
-    score = 0;
-    scoreKeeper = shared.scene->addSimpleText(" ");
-    scoreKeeper->setPos(sceneWidth-30, 30);
-    scoreKeeper->setBrush(Qt::white);
-    scoreKeeper->setZValue(1);
-    updateScore();
     qsrand(time(NULL));
 }
 
@@ -236,6 +231,11 @@ void MovingPolygons::rotate()
     array->rotate(generateRandomPolyBlock());
 }
 
+int MovingPolygons::getSize()
+{
+    return size;
+}
+
 void MovingPolygons::timerEvent(QTimerEvent *event)
 {
     if(event->timerId()==wallTimer){
@@ -246,26 +246,47 @@ void MovingPolygons::timerEvent(QTimerEvent *event)
         count++;
         if(count%75==0) rotate();
     }
-    else if(event->timerId()==scoreTimer){
-        score++;
-        updateScore();
-    }
 }
 
 void MovingPolygons::killTime()
 {
     killTimer(wallTimer);
-    killTimer(scoreTimer);
 }
 
-void MovingPolygons::updateScore()
+Score::Score(share s, QObject *parent) :
+    QObject(parent)
+{
+    shared = s;
+    score = 0;
+    scoreKeeper = shared.scene->addSimpleText(" ");
+    scoreKeeper->setPos(shared.scene->width()-30, 30);
+    scoreKeeper->setBrush(Qt::white);
+    scoreKeeper->setZValue(1);
+    updateScore();
+    scoreTimer = startTimer(1000);
+}
+
+void Score::updateScore()
 {
     std::stringstream out;
     out << score;
     scoreKeeper->setText(QString::fromStdString(out.str()));
 }
 
-int MovingPolygons::getSize()
+void Score::timerEvent(QTimerEvent *event)
 {
-    return size;
+    if(event->timerId()==scoreTimer){
+        score++;
+        updateScore();
+    }
+}
+
+void Score::killTime()
+{
+    killTimer(scoreTimer);
+}
+
+int Score::getScore()
+{
+    return score;
 }

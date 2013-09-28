@@ -30,10 +30,12 @@
 
 class Dot;
 class MovingPolygons;
+class Score;
 
 typedef struct Share{
     QGraphicsScene* scene;
     MovingPolygons* walls;
+    Score* score;
     Dot* dot;
 }share;
 
@@ -96,12 +98,12 @@ public:
     int getSize();
     void rotate();
     void killTime();
-    void updateScore();
+
 protected:
     void timerEvent(QTimerEvent *event);
+
 private:
     share shared;
-    QGraphicsSimpleTextItem* scoreKeeper;
     PolygonArray* array;
     polygonBlock generatePolygonBlock(QPolygonF, QPolygonF);
     qreal sceneWidth;
@@ -111,7 +113,25 @@ private:
     int size;
     int count;
     int wallTimer;
-    int scoreTimer;
-    int score;
 };
+
+class Score : public QObject
+{
+    Q_OBJECT
+public:
+    explicit Score(share, QObject *parent=0);
+    void killTime();
+    void updateScore();
+    int getScore();
+
+protected:
+    void timerEvent(QTimerEvent *event);
+
+private:
+    share shared;
+    QGraphicsSimpleTextItem* scoreKeeper;
+    int score;
+    int scoreTimer;
+};
+
 #endif // TUNNELW_H

@@ -18,7 +18,6 @@ SOURCES += main.cpp\
     polygonarray.cpp
 
 HEADERS  += tunnelw.h \
-    polygonarray.h \
-    linker.h
+    polygonarray.h
 
 FORMS    += tunnelw.ui
