@@ -16,10 +16,6 @@
 #include "tunnelw.h"
 #include "ui_tunnelw.h"
 #include <QDebug>
-#include <QApplication>
-#include <QVector>
-#include <QTime>
-#include <QString>
 #include <sstream>
 
 TunnelW::TunnelW(QWidget *parent) :
@@ -29,12 +25,12 @@ TunnelW::TunnelW(QWidget *parent) :
     ui->setupUi(this);
     ui->view->setRenderHint(QPainter::Antialiasing);
     createScene(ui->view->size().width(), ui->view->size().height());
-    shared.scene->setBackgroundBrush(Qt::gray);
     startGame();
 }
 
 TunnelW::~TunnelW()
 {
+//    cleanShared();
     delete ui;
 }
 
@@ -43,14 +39,32 @@ void TunnelW::createScene(int w, int h)
     shared.scene = new QGraphicsScene();
     ui->view->setScene(shared.scene);
     shared.scene->setSceneRect(0,0,w-2,h-2);
+    shared.scene->setBackgroundBrush(Qt::gray);
 }
 
 void TunnelW::startGame()
 {
-    shared.walls = new MovingPolygons(shared);
-    shared.score = new Score(shared);
+    shared.walls = new MovingPolygons(shared, shared.scene);
+    shared.score = new Score(shared, shared.scene);
+    shared.screen = new EndScreen(shared, this);
     shared.dot = new Dot(shared, this);
 //    qDebug() << "HI!!";
+}
+
+void TunnelW::restartGame()
+{
+    cleanShared();
+    createScene(ui->view->size().width(), ui->view->size().height());
+    startGame();
+}
+
+void TunnelW::cleanShared()
+{
+    delete shared.scene;
+    delete shared.score;
+    delete shared.screen;
+    delete shared.walls;
+    delete shared.dot;
 }
 
 void TunnelW::keyPressEvent(QKeyEvent *event)
@@ -68,12 +82,17 @@ Dot::Dot(share s, QWidget *parent) :
     QWidget(parent)
 {
     shared = s;
-    dot = shared.scene->addEllipse(shared.scene->width()/2-10,
+    dot =  (shared.scene->addEllipse(shared.scene->width()/2-10,
                             ((shared.walls->getSize() - 4)*POLYGON_HEIGHT)-POLYGON_HEIGHT/2-10,
-                            20, 20, QPen(Qt::blue),QBrush(Qt::blue));
+                            20, 20, QPen(Qt::blue),QBrush(Qt::blue)));
     left = false;
     right = false;
     timer = startTimer(20);
+}
+
+Dot::~Dot()
+{
+//    delete dot;
 }
 
 void Dot::keyPressEvent(QKeyEvent *event)
@@ -107,6 +126,7 @@ void Dot::timerEvent(QTimerEvent *event)
         killTimer(timer);
         shared.walls->killTime();
         shared.score->killTime();
+        shared.screen->exec();
     }
 }
 
@@ -127,6 +147,11 @@ MovingPolygons::MovingPolygons(share s, QObject *parent) :
     count = 0;
     wallTimer = startTimer(40);
     qsrand(time(NULL));
+}
+
+MovingPolygons::~MovingPolygons()
+{
+    array->~PolygonArray();
 }
 
 polygonBlock MovingPolygons::generateStraightCenterPolyBlock(int pos)
@@ -265,6 +290,11 @@ Score::Score(share s, QObject *parent) :
     scoreTimer = startTimer(1000);
 }
 
+Score::~Score()
+{
+//    delete scoreKeeper;
+}
+
 void Score::updateScore()
 {
     std::stringstream out;
@@ -290,9 +320,26 @@ int Score::getScore()
     return score;
 }
 
-EndScreen::EndScreen(share s, QWidget *parent) :
+EndScreen::EndScreen(share s, TunnelW* t, QWidget *parent) :
     QWidget(parent)
 {
     shared = s;
+    tun = t;
+    endBox = new QMessageBox(parent);
+    endBox->setText("Score ");
+    again = endBox->addButton("Play again", QMessageBox::ResetRole);
+}
 
+EndScreen::~EndScreen()
+{
+//    delete endBox;
+//    delete again;
+}
+
+void EndScreen::exec()
+{
+    endBox->exec();
+    if(endBox->clickedButton() == again){
+        tun->restartGame();
+    }
 }

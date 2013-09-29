@@ -22,6 +22,12 @@ PolygonArray::PolygonArray(int s)
     array = new polygonBlock[size];
 }
 
+PolygonArray::~PolygonArray()
+{
+//    delete array->left;
+//    delete array->right;
+}
+
 polygonBlock PolygonArray::get(int pos)
 {
     return array[pos];
@@ -34,6 +40,8 @@ void PolygonArray::set(polygonBlock newBlock, int pos)
 
 void PolygonArray::rotate(polygonBlock newPoly)
 {
+    delete array[size-1].left;
+    delete array[size-1].right;
     for(int i = size-1; i > 0; i--){
         array[i] = array[i-1];
     }

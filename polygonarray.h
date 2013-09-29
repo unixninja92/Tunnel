@@ -16,6 +16,7 @@
 #ifndef POLYGONARRAY_H
 #define POLYGONARRAY_H
 
+#include <QPointer>
 #include <QGraphicsPolygonItem>
 
 typedef struct polygonBlock {
@@ -27,6 +28,7 @@ class PolygonArray
 {
 public:
     PolygonArray(int);
+    ~PolygonArray();
     polygonBlock get(int);
     void rotate(polygonBlock);
     void set(polygonBlock, int);

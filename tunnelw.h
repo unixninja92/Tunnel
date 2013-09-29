@@ -22,21 +22,22 @@
 
 #include <QWidget>
 #include <QKeyEvent>
-#include <QTimerEvent>
-#include <QGraphicsScene>
-#include <QGraphicsEllipseItem>
+#include <QMessageBox>
+#include <QPushButton>
+#include <QPointer>
 #include "polygonarray.h"
-//#include "linker.h"
 
 class Dot;
 class MovingPolygons;
 class Score;
+class EndScreen;
 
 typedef struct Share{
-    QGraphicsScene* scene;
-    MovingPolygons* walls;
-    Score* score;
-    Dot* dot;
+    QPointer<QGraphicsScene> scene;
+    QPointer<MovingPolygons> walls;
+    QPointer<Score> score;
+    QPointer<Dot> dot;
+    QPointer<EndScreen> screen;
 }share;
 
 namespace Ui {
@@ -51,10 +52,12 @@ public:
     explicit TunnelW(QWidget *parent = 0);
     ~TunnelW();
     void startGame();
+    void restartGame();
 
 protected:
     void keyPressEvent(QKeyEvent *);
     void keyReleaseEvent(QKeyEvent *);
+    void cleanShared();
 
 private:
     Ui::TunnelW *ui;
@@ -67,6 +70,7 @@ class Dot : public QWidget
     Q_OBJECT
 public:
     explicit Dot(share, QWidget *parent = 0);
+    ~Dot();
 
 signals:
 
@@ -91,6 +95,7 @@ class MovingPolygons : public QObject
     Q_OBJECT
 public:
     explicit MovingPolygons(share, QObject *parent = 0);
+    ~MovingPolygons();
     polygonBlock generateStraightCenterPolyBlock(int pos = -1);
     polygonBlock generateRandomPolyBlock();
     polygonBlock getCurrentBlock();
@@ -120,6 +125,7 @@ class Score : public QObject
     Q_OBJECT
 public:
     explicit Score(share, QObject *parent=0);
+    ~Score();
     void killTime();
     void updateScore();
     int getScore();
@@ -138,10 +144,15 @@ class EndScreen : public QWidget
 {
     Q_OBJECT
 public:
-    explicit EndScreen(share, QWidget *parent=0);
+    explicit EndScreen(share, TunnelW*, QWidget *parent=0);
+    ~EndScreen();
+    void exec();
 
 private:
     share shared;
+    QPointer<QMessageBox> endBox;
+    QPointer<QAbstractButton> again;
+    QPointer<TunnelW> tun;
 };
 
 #endif // TUNNELW_H
