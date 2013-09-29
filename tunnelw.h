@@ -25,6 +25,7 @@
 #include <QMessageBox>
 #include <QPushButton>
 #include <QPointer>
+#include <QList>
 #include "polygonarray.h"
 
 class Dot;
@@ -39,6 +40,11 @@ typedef struct Share{
     QPointer<Dot> dot;
     QPointer<EndScreen> screen;
 }share;
+
+typedef struct polygonBlock {
+    QGraphicsPolygonItem* left;
+    QGraphicsPolygonItem* right;
+}polygonBlock;
 
 namespace Ui {
 class TunnelW;
@@ -70,7 +76,6 @@ class Dot : public QWidget
     Q_OBJECT
 public:
     explicit Dot(share, QWidget *parent = 0);
-    ~Dot();
 
 signals:
 
@@ -95,7 +100,6 @@ class MovingPolygons : public QObject
     Q_OBJECT
 public:
     explicit MovingPolygons(share, QObject *parent = 0);
-    ~MovingPolygons();
     polygonBlock generateStraightCenterPolyBlock(int pos = -1);
     polygonBlock generateRandomPolyBlock();
     polygonBlock getCurrentBlock();
@@ -110,6 +114,7 @@ protected:
 private:
     share shared;
     PolygonArray* array;
+    QList<polygonBlock> queue;
     polygonBlock generatePolygonBlock(QPolygonF, QPolygonF);
     qreal sceneWidth;
     qreal sceneHeight;
@@ -125,7 +130,6 @@ class Score : public QObject
     Q_OBJECT
 public:
     explicit Score(share, QObject *parent=0);
-    ~Score();
     void killTime();
     void updateScore();
     int getScore();
@@ -145,7 +149,6 @@ class EndScreen : public QWidget
     Q_OBJECT
 public:
     explicit EndScreen(share, TunnelW*, QWidget *parent=0);
-    ~EndScreen();
     void exec();
 
 private:

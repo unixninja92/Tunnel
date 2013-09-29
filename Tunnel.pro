@@ -14,10 +14,8 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        tunnelw.cpp \
-    polygonarray.cpp
+        tunnelw.cpp
 
-HEADERS  += tunnelw.h \
-    polygonarray.h
+HEADERS  += tunnelw.h
 
 FORMS    += tunnelw.ui

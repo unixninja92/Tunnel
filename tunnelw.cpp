@@ -36,7 +36,7 @@ TunnelW::~TunnelW()
 
 void TunnelW::createScene(int w, int h)
 {
-    shared.scene = new QGraphicsScene();
+    shared.scene = new QGraphicsScene(this);
     ui->view->setScene(shared.scene);
     shared.scene->setSceneRect(0,0,w-2,h-2);
     shared.scene->setBackgroundBrush(Qt::gray);
@@ -90,11 +90,6 @@ Dot::Dot(share s, QWidget *parent) :
     timer = startTimer(20);
 }
 
-Dot::~Dot()
-{
-//    delete dot;
-}
-
 void Dot::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Comma) {
@@ -139,19 +134,16 @@ MovingPolygons::MovingPolygons(share s, QObject *parent) :
     sceneWidth = shared.scene->width();
     sceneMidWidth = sceneWidth/2;
     sceneHeight = shared.scene->height();
-    array = new PolygonArray(sceneHeight/POLYGON_HEIGHT+3);//+3 so two blocks are always off screen
-    size = array->getSize();
+//    array = new PolygonArray(sceneHeight/POLYGON_HEIGHT+3);//+3 so two blocks are always off screen
+    size = sceneHeight/POLYGON_HEIGHT+3;
+    queue = *new QList<polygonBlock>();
     for(int i = 0; i < size; i++){
-        array->set(generateStraightCenterPolyBlock(i-1), i);
+        queue.append(generateStraightCenterPolyBlock(i-1));
+//        array->set(generateStraightCenterPolyBlock(i-1), i);
     }
     count = 0;
     wallTimer = startTimer(40);
     qsrand(time(NULL));
-}
-
-MovingPolygons::~MovingPolygons()
-{
-    array->~PolygonArray();
 }
 
 polygonBlock MovingPolygons::generateStraightCenterPolyBlock(int pos)
@@ -241,18 +233,20 @@ polygonBlock MovingPolygons::generatePolygonBlock(QPolygonF left, QPolygonF righ
 
 polygonBlock MovingPolygons::getCurrentBlock()
 {
-    return array->get(size-4);
+    return queue.at(size-4);//array->get(size-4);
 }
 
 polygonBlock MovingPolygons::getNextBlock()
 {
-    return array->get(size-5);
+    return queue.at(size-5);//array->get(size-5);
 }
 
 void MovingPolygons::rotate()
 {
 //    array->rotate(generateStraightCenterPolyBlock(-1));
-    array->rotate(generateRandomPolyBlock());
+//    array->rotate(generateRandomPolyBlock());
+    queue.pop_back();
+    queue.push_front(generateRandomPolyBlock());
 }
 
 int MovingPolygons::getSize()
@@ -264,8 +258,10 @@ void MovingPolygons::timerEvent(QTimerEvent *event)
 {
     if(event->timerId()==wallTimer){
         for(int i = 0; i<size; i++){
-            array->get(i).left->moveBy(0,1);
-            array->get(i).right->moveBy(0,1);
+//            array->get(i).left->moveBy(0,1);
+//            array->get(i).right->moveBy(0,1);
+            queue.at(i).left->moveBy(0,1);
+            queue.at(i).right->moveBy(0,1);
         }
         count++;
         if(count%75==0) rotate();
@@ -288,11 +284,6 @@ Score::Score(share s, QObject *parent) :
     scoreKeeper->setZValue(1);
     updateScore();
     scoreTimer = startTimer(1000);
-}
-
-Score::~Score()
-{
-//    delete scoreKeeper;
 }
 
 void Score::updateScore()
@@ -325,15 +316,9 @@ EndScreen::EndScreen(share s, TunnelW* t, QWidget *parent) :
 {
     shared = s;
     tun = t;
-    endBox = new QMessageBox(parent);
+    endBox = new QMessageBox(this);
     endBox->setText("Score ");
     again = endBox->addButton("Play again", QMessageBox::ResetRole);
-}
-
-EndScreen::~EndScreen()
-{
-//    delete endBox;
-//    delete again;
 }
 
 void EndScreen::exec()
