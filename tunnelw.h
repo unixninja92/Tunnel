@@ -26,7 +26,10 @@
 #include <QPushButton>
 #include <QPointer>
 #include <QList>
-#include "polygonarray.h"
+#include <QGraphicsScene>
+#include <QGraphicsPolygonItem>
+#include <QGraphicsEllipseItem>
+//#include "polygonarray.h"
 
 class Dot;
 class MovingPolygons;
@@ -113,7 +116,7 @@ protected:
 
 private:
     share shared;
-    PolygonArray* array;
+//    PolygonArray* array;
     QList<polygonBlock> queue;
     polygonBlock generatePolygonBlock(QPolygonF, QPolygonF);
     qreal sceneWidth;
