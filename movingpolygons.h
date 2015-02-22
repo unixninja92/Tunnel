@@ -24,7 +24,7 @@ class MovingPolygons : public QObject
 {
     Q_OBJECT
 public:
-    explicit MovingPolygons(share, QObject *parent = 0);
+    explicit MovingPolygons(share, int, QObject *parent = 0);
     polygonBlock generateStraightCenterPolyBlock(int pos = -1);
     polygonBlock generateRandomPolyBlock();
     polygonBlock getCurrentBlock();
@@ -49,17 +49,5 @@ private:
     int count;
     int wallTimer;
 };
-
-//class MovingPolygons : public QObject
-//{
-//    Q_OBJECT
-//public:
-//    explicit MovingPolygons(QObject *parent = 0);
-//    ~MovingPolygons();
-
-//signals:
-
-//public slots:
-//};
 
 #endif // MOVINGPOLYGONS_H

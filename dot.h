@@ -27,7 +27,7 @@ class Dot : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Dot(share, QWidget *parent = 0);
+    explicit Dot(share, int, QWidget *parent = 0);
 
 signals:
 

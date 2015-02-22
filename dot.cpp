@@ -15,7 +15,7 @@
  */
 #include "dot.h"
 
-Dot::Dot(share s, QWidget *parent) :
+Dot::Dot(share s, int speed, QWidget *parent) :
     QWidget(parent)
 {
     shared = s;
@@ -24,7 +24,7 @@ Dot::Dot(share s, QWidget *parent) :
                             20, 20, QPen(Qt::blue),QBrush(Qt::blue)));
     left = false;
     right = false;
-    timer = startTimer(20);
+    timer = startTimer(speed);
 }
 
 void Dot::keyPressEvent(QKeyEvent *event)

@@ -47,22 +47,28 @@ MainMenu::~MainMenu()
 
 void MainMenu::easyMode()
 {
-    tunnel->show();
-    this->hide();
-    if(!tunnel->started)
-        tunnel->startGame();
-    else
-        tunnel->restartGame();
+    start(40);
 }
 
 void MainMenu::medMode()
 {
-
+    start(20);
 }
 
 void MainMenu::hardMode()
 {
+    start(10);
+}
 
+void MainMenu::start(int speed)
+{
+    tunnel->show();
+    this->hide();
+    tunnel->setSpeed(speed);
+    if(!tunnel->hasStarted())
+        tunnel->startGame();
+    else
+        tunnel->restartGame();
 }
 
 void MainMenu::settings()

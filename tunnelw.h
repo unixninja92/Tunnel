@@ -34,7 +34,9 @@ public:
     void cleanShared();
     int getScore();
     MainMenu *menu;
-    bool started;
+    bool hasStarted();
+    void setSpeed(int s);
+    int getSpeed();
 
 protected:
     void keyPressEvent(QKeyEvent *);
@@ -44,6 +46,8 @@ private:
     Ui::TunnelW *ui;
     void createScene(int w, int h);
     share shared;
+    bool started;
+    int speed;
 };
 
 #endif // TUNNELW_H

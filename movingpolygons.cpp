@@ -15,7 +15,7 @@
  */
 #include "movingpolygons.h"
 
-MovingPolygons::MovingPolygons(share s, QObject *parent) :
+MovingPolygons::MovingPolygons(share s, int speed, QObject *parent) :
     QObject(parent)
 {
     shared = s;
@@ -28,7 +28,7 @@ MovingPolygons::MovingPolygons(share s, QObject *parent) :
         queue.append(generateStraightCenterPolyBlock(i-1));
     }
     count = 0;
-    wallTimer = startTimer(40);
+    wallTimer = startTimer(speed);
     qsrand(time(NULL));
 }
 

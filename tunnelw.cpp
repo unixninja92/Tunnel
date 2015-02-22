@@ -44,10 +44,10 @@ void TunnelW::startGame()
 {
     started = true;
     createScene(ui->view->size().width(), ui->view->size().height());
-    shared.walls = new MovingPolygons(shared, shared.scene);
+    shared.walls = new MovingPolygons(shared, speed, shared.scene);
     shared.score = new Score(shared, shared.scene);
     shared.screen = new EndScreen(shared, this);
-    shared.dot = new Dot(shared, this);
+    shared.dot = new Dot(shared, speed*.5, this);
 //    qDebug() << "HI!!";
 }
 
@@ -79,4 +79,19 @@ void TunnelW::keyReleaseEvent(QKeyEvent *event)
 int TunnelW::getScore()
 {
     return shared.score->getScore();
+}
+
+int TunnelW::getSpeed()
+{
+    return speed;
+}
+
+void TunnelW::setSpeed(int s)
+{
+    speed = s;
+}
+
+bool TunnelW::hasStarted()
+{
+    return started;
 }

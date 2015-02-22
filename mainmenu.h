@@ -49,6 +49,7 @@ private:
     QPushButton *hard;
     QPushButton *score;
     QPushButton *setting;
+    void start(int);
 };
 
 #endif // MAINMENU_H
