@@ -18,13 +18,16 @@ SOURCES += main.cpp\
     score.cpp \
     movingpolygons.cpp \
     dot.cpp \
-    endscreen.cpp
+    endscreen.cpp \
+    mainmenu.cpp
 
 HEADERS  += tunnelw.h \
     score.h \
     movingpolygons.h \
     dot.h \
     shared.h \
-    endscreen.h
+    endscreen.h \
+    mainmenu.h
 
-FORMS    += tunnelw.ui
+FORMS    += tunnelw.ui \
+    mainmenu.ui

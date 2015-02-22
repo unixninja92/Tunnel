@@ -17,6 +17,7 @@ public:
 private:
     share shared;
     QPointer<QMessageBox> endBox;
+    QPointer<QAbstractButton> menu;
     QPointer<QAbstractButton> again;
     QPointer<TunnelW> tun;
 };
