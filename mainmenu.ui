@@ -54,6 +54,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="mediumButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -97,6 +100,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="hardButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="font">
         <font>
          <pointsize>24</pointsize>
@@ -122,6 +128,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="scoreButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="font">
         <font>
          <pointsize>24</pointsize>
@@ -134,6 +143,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="settingsButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
        <property name="font">
         <font>
          <pointsize>24</pointsize>
