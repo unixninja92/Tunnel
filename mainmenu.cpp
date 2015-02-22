@@ -26,12 +26,14 @@ MainMenu::MainMenu(QWidget *parent) :
     easy = ui->easyButton;
     med = ui->mediumButton;
     hard = ui->hardButton;
+    insane = ui->insaneButton;
     score = ui->scoreButton;
     setting = ui->settingsButton;
 
     connect(easy, SIGNAL(released()), this, SLOT(easyMode()));
     connect(med, SIGNAL(released()), this, SLOT(medMode()));
     connect(hard, SIGNAL(released()), this, SLOT(hardMode()));
+    connect(insane, SIGNAL(released()), this, SLOT(insaneMode()));
     connect(score, SIGNAL(released()), this, SLOT(scores()));
     connect(setting, SIGNAL(released()), this, SLOT(settings()));
 
@@ -58,6 +60,11 @@ void MainMenu::medMode()
 void MainMenu::hardMode()
 {
     start(10);
+}
+
+void MainMenu::insaneMode()
+{
+    start(2);
 }
 
 void MainMenu::start(int speed)

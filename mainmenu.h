@@ -38,6 +38,7 @@ private slots:
     void easyMode();
     void medMode();
     void hardMode();
+    void insaneMode();
     void scores();
     void settings();
 
@@ -47,6 +48,7 @@ private:
     QPushButton *easy;
     QPushButton *med;
     QPushButton *hard;
+    QPushButton *insane;
     QPushButton *score;
     QPushButton *setting;
     void start(int);
