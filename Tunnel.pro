@@ -14,8 +14,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        tunnelw.cpp
+        tunnelw.cpp \
+    score.cpp \
+    movingpolygons.cpp \
+    dot.cpp \
+    endscreen.cpp
 
-HEADERS  += tunnelw.h
+HEADERS  += tunnelw.h \
+    score.h \
+    movingpolygons.h \
+    dot.h \
+    shared.h \
+    endscreen.h
 
 FORMS    += tunnelw.ui
