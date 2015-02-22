@@ -23,8 +23,7 @@ TunnelW::TunnelW(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->view->setRenderHint(QPainter::Antialiasing);
-    createScene(ui->view->size().width(), ui->view->size().height());
-    startGame();
+    started = false;
 }
 
 TunnelW::~TunnelW()
@@ -43,6 +42,8 @@ void TunnelW::createScene(int w, int h)
 
 void TunnelW::startGame()
 {
+    started = true;
+    createScene(ui->view->size().width(), ui->view->size().height());
     shared.walls = new MovingPolygons(shared, shared.scene);
     shared.score = new Score(shared, shared.scene);
     shared.screen = new EndScreen(shared, this);
@@ -53,7 +54,6 @@ void TunnelW::startGame()
 void TunnelW::restartGame()
 {
     cleanShared();
-    createScene(ui->view->size().width(), ui->view->size().height());
     startGame();
 }
 
@@ -74,4 +74,9 @@ void TunnelW::keyPressEvent(QKeyEvent *event)
 void TunnelW::keyReleaseEvent(QKeyEvent *event)
 {
     QApplication::sendEvent(shared.dot, event);
+}
+
+int TunnelW::getScore()
+{
+    return shared.score->getScore();
 }

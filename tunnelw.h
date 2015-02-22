@@ -18,6 +18,9 @@
 
 #include <shared.h>
 #include <dot.h>
+#include <mainmenu.h>
+
+class MainMenu;
 
 class TunnelW : public QWidget
 {
@@ -28,11 +31,14 @@ public:
     ~TunnelW();
     void startGame();
     void restartGame();
+    void cleanShared();
+    int getScore();
+    MainMenu *menu;
+    bool started;
 
 protected:
     void keyPressEvent(QKeyEvent *);
     void keyReleaseEvent(QKeyEvent *);
-    void cleanShared();
 
 private:
     Ui::TunnelW *ui;

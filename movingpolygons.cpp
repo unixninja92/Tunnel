@@ -1,14 +1,19 @@
+/*
+ *Copyright 2014 unixninja92
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 #include "movingpolygons.h"
-
-//MovingPolygons::MovingPolygons(QObject *parent) : QObject(parent)
-//{
-
-//}
-
-//MovingPolygons::~MovingPolygons()
-//{
-
-//}
 
 MovingPolygons::MovingPolygons(share s, QObject *parent) :
     QObject(parent)
@@ -17,12 +22,10 @@ MovingPolygons::MovingPolygons(share s, QObject *parent) :
     sceneWidth = shared.scene->width();
     sceneMidWidth = sceneWidth/2;
     sceneHeight = shared.scene->height();
-//    array = new PolygonArray(sceneHeight/POLYGON_HEIGHT+3);//+3 so two blocks are always off screen
     size = sceneHeight/POLYGON_HEIGHT+3;
     queue = *new QList<polygonBlock>();
     for(int i = 0; i < size; i++){
         queue.append(generateStraightCenterPolyBlock(i-1));
-//        array->set(generateStraightCenterPolyBlock(i-1), i);
     }
     count = 0;
     wallTimer = startTimer(40);
@@ -116,18 +119,16 @@ polygonBlock MovingPolygons::generatePolygonBlock(QPolygonF left, QPolygonF righ
 
 polygonBlock MovingPolygons::getCurrentBlock()
 {
-    return queue.at(size-4);//array->get(size-4);
+    return queue.at(size-4);
 }
 
 polygonBlock MovingPolygons::getNextBlock()
 {
-    return queue.at(size-5);//array->get(size-5);
+    return queue.at(size-5);
 }
 
 void MovingPolygons::rotate()
 {
-//    array->rotate(generateStraightCenterPolyBlock(-1));
-//    array->rotate(generateRandomPolyBlock());
     queue.pop_back();
     queue.push_front(generateRandomPolyBlock());
 }
@@ -141,8 +142,6 @@ void MovingPolygons::timerEvent(QTimerEvent *event)
 {
     if(event->timerId()==wallTimer){
         for(int i = 0; i<size; i++){
-//            array->get(i).left->moveBy(0,1);
-//            array->get(i).right->moveBy(0,1);
             queue.at(i).left->moveBy(0,1);
             queue.at(i).right->moveBy(0,1);
         }
