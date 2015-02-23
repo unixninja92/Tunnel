@@ -17,17 +17,17 @@
 #define DOT_H
 
 #include <QObject>
-#include <QWidget>
+#include <QOpenGLWidget>
 #include <shared.h>
 #include <movingpolygons.h>
 #include <score.h>
 #include <endscreen.h>
 
-class Dot : public QWidget
+class Dot : public QOpenGLWidget
 {
     Q_OBJECT
 public:
-    explicit Dot(share, int, QWidget *parent = 0);
+    explicit Dot(share, int, double, QOpenGLWidget *parent = 0);
 
 signals:
 
@@ -44,18 +44,7 @@ private:
     bool left;
     bool right;
     int timer;
+    double move;
 };
-
-//class Dot : public QWidget
-//{
-//    Q_OBJECT
-//public:
-//    explicit Dot(QWidget *parent = 0);
-//    ~Dot();
-
-//signals:
-
-//public slots:
-//};
 
 #endif // DOT_H

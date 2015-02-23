@@ -24,7 +24,7 @@ class MovingPolygons : public QObject
 {
     Q_OBJECT
 public:
-    explicit MovingPolygons(share, int, QObject *parent = 0);
+    explicit MovingPolygons(share, int, double, QObject *parent = 0);
     polygonBlock generateStraightCenterPolyBlock(int pos = -1);
     polygonBlock generateRandomPolyBlock();
     polygonBlock getCurrentBlock();
@@ -38,7 +38,6 @@ protected:
 
 private:
     share shared;
-//    PolygonArray* array;
     QList<polygonBlock> queue;
     polygonBlock generatePolygonBlock(QPolygonF, QPolygonF);
     qreal sceneWidth;
@@ -48,6 +47,7 @@ private:
     int size;
     int count;
     int wallTimer;
+    double move;
 };
 
 #endif // MOVINGPOLYGONS_H

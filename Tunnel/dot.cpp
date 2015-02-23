@@ -15,8 +15,8 @@
  */
 #include "dot.h"
 
-Dot::Dot(share s, int speed, QWidget *parent) :
-    QWidget(parent)
+Dot::Dot(share s, int speed, double m, QOpenGLWidget *parent) :
+    QOpenGLWidget(parent)
 {
     shared = s;
     dot =  (shared.scene->addEllipse(shared.scene->width()/2-10,
@@ -25,6 +25,7 @@ Dot::Dot(share s, int speed, QWidget *parent) :
     left = false;
     right = false;
     timer = startTimer(speed);
+    move = m;
 }
 
 void Dot::keyPressEvent(QKeyEvent *event)
@@ -49,8 +50,8 @@ void Dot::keyReleaseEvent(QKeyEvent *event)
 
 void Dot::timerEvent(QTimerEvent *event)
 {
-    if(left) dot->moveBy(-1,0);
-    else if(right) dot->moveBy(1,0);
+    if(left) dot->moveBy(-move,0);
+    else if(right) dot->moveBy(move,0);
     if(dot->collidesWithItem(shared.walls->getCurrentBlock().left) ||
             dot->collidesWithItem(shared.walls->getNextBlock().left) ||
             dot->collidesWithItem(shared.walls->getCurrentBlock().right) ||

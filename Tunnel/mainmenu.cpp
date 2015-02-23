@@ -49,29 +49,32 @@ MainMenu::~MainMenu()
 
 void MainMenu::easyMode()
 {
-    start(40);
+    start(40, 30, 1, 1);
 }
 
 void MainMenu::medMode()
 {
-    start(20);
+    start(20, 10, 1, 1);
 }
 
 void MainMenu::hardMode()
 {
-    start(10);
+    start(10, 5, 2, 3);
 }
 
 void MainMenu::insaneMode()
 {
-    start(2);
+    start(5, 2, 5, 5);
 }
 
-void MainMenu::start(int speed)
+void MainMenu::start(int pSpeed, int dSpeed, double pMove, double dMove)
 {
     tunnel->show();
     this->hide();
-    tunnel->setSpeed(speed);
+    tunnel->setPSpeed(pSpeed);
+    tunnel->setPMove(pMove);
+    tunnel->setDSpeed(dSpeed);
+    tunnel->setDMove(dMove);
     if(!tunnel->hasStarted())
         tunnel->startGame();
     else

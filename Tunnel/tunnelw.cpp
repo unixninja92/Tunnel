@@ -17,8 +17,8 @@
 #include "ui_tunnelw.h"
 #include <QDebug>
 
-TunnelW::TunnelW(QWidget *parent) :
-    QWidget(parent),
+TunnelW::TunnelW(QOpenGLWidget *parent) :
+    QOpenGLWidget(parent),
     ui(new Ui::TunnelW)
 {
     ui->setupUi(this);
@@ -44,10 +44,10 @@ void TunnelW::startGame()
 {
     started = true;
     createScene(ui->view->size().width(), ui->view->size().height());
-    shared.walls = new MovingPolygons(shared, speed, shared.scene);
+    shared.walls = new MovingPolygons(shared, pSpeed, pMove, shared.scene);
     shared.score = new Score(shared, shared.scene);
     shared.screen = new EndScreen(shared, this);
-    shared.dot = new Dot(shared, speed*.5, this);
+    shared.dot = new Dot(shared, dSpeed*.5, dMove, this);
 //    qDebug() << "HI!!";
 }
 
@@ -81,14 +81,44 @@ int TunnelW::getScore()
     return shared.score->getScore();
 }
 
-int TunnelW::getSpeed()
+int TunnelW::getPSpeed()
 {
-    return speed;
+    return pSpeed;
 }
 
-void TunnelW::setSpeed(int s)
+void TunnelW::setPSpeed(int s)
 {
-    speed = s;
+    pSpeed = s;
+}
+
+int TunnelW::getDSpeed()
+{
+    return dSpeed;
+}
+
+void TunnelW::setDSpeed(int s)
+{
+    dSpeed = s;
+}
+
+double TunnelW::getPMove()
+{
+    return pMove;
+}
+
+void TunnelW::setPMove(double m)
+{
+    pMove = m;
+}
+
+double TunnelW::getDMove()
+{
+    return dMove;
+}
+
+void TunnelW::setDMove(double m)
+{
+    dMove = m;
 }
 
 bool TunnelW::hasStarted()

@@ -21,6 +21,7 @@
 #define WIDTH_MODIFIER (TUNNEL_WIDTH/2)
 
 #include <QWidget>
+#include <QOpenGLWidget>
 #include <QKeyEvent>
 #include <QMessageBox>
 #include <QPushButton>

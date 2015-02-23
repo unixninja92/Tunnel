@@ -15,8 +15,9 @@
  */
 #include "movingpolygons.h"
 #include <QDebug>
+#include <math.h>
 
-MovingPolygons::MovingPolygons(share s, int speed, QObject *parent) :
+MovingPolygons::MovingPolygons(share s, int speed, double m, QObject *parent) :
     QObject(parent)
 {
     shared = s;
@@ -31,6 +32,8 @@ MovingPolygons::MovingPolygons(share s, int speed, QObject *parent) :
     count = 0;
     wallTimer = startTimer(speed);
     qsrand(time(NULL));
+
+    move = m;
 }
 
 polygonBlock MovingPolygons::generateStraightCenterPolyBlock(int pos)
@@ -144,11 +147,11 @@ void MovingPolygons::timerEvent(QTimerEvent *event)
 //    qDebug() << size;
     if(event->timerId()==wallTimer){
         for(int i = 0; i<size; i++){
-            queue.at(i).left->moveBy(0,1);
-            queue.at(i).right->moveBy(0,1);
+            queue.at(i).left->moveBy(0,move);
+            queue.at(i).right->moveBy(0,move);
         }
         count++;
-        if(count%75==0) rotate();
+        if(count%((int)floor(75/move))==0) rotate();
     }
 }
 

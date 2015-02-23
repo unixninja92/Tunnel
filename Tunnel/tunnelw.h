@@ -22,12 +22,12 @@
 
 class MainMenu;
 
-class TunnelW : public QWidget
+class TunnelW : public QOpenGLWidget
 {
     Q_OBJECT
 
 public:
-    explicit TunnelW(QWidget *parent = 0);
+    explicit TunnelW(QOpenGLWidget *parent = 0);
     ~TunnelW();
     void startGame();
     void restartGame();
@@ -35,8 +35,14 @@ public:
     int getScore();
     MainMenu *menu;
     bool hasStarted();
-    void setSpeed(int s);
-    int getSpeed();
+    void setPSpeed(int);
+    int getPSpeed();
+    void setDSpeed(int);
+    int getDSpeed();
+    void setDMove(double);
+    double getDMove();
+    void setPMove(double);
+    double getPMove();
 
 protected:
     void keyPressEvent(QKeyEvent *);
@@ -47,7 +53,10 @@ private:
     void createScene(int w, int h);
     share shared;
     bool started;
-    int speed;
+    int dSpeed;
+    int pSpeed;
+    double dMove;
+    double pMove;
 };
 
 #endif // TUNNELW_H

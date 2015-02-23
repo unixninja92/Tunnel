@@ -51,7 +51,7 @@ private:
     QPushButton *insane;
     QPushButton *score;
     QPushButton *setting;
-    void start(int);
+    void start(int, int, double, double);
 };
 
 #endif // MAINMENU_H
