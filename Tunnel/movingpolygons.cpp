@@ -153,7 +153,7 @@ void MovingPolygons::timerEvent(QTimerEvent *event)
             queue.at(i).right->moveBy(0,move);
         }
         count++;
-        if(count%((int)floor(75/move))==0) rotate();
+        if(count%((int)floor(POLYGON_HEIGHT/move))==0) rotate();
     }
 }
 

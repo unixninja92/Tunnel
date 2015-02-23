@@ -51,7 +51,7 @@ MainMenu::~MainMenu()
 
 void MainMenu::easyMode()
 {
-    start(40, 30, 1, 1);
+    start(30, 25, 1, 1);
 }
 
 void MainMenu::medMode()
@@ -61,12 +61,12 @@ void MainMenu::medMode()
 
 void MainMenu::hardMode()
 {
-    start(10, 5, 2, 3);
+    start(6, 4, 4, 5);
 }
 
 void MainMenu::insaneMode()
 {
-    start(5, 2, 5, 5);
+    start(6, 4, 5, 6);
 }
 
 void MainMenu::start(int pSpeed, int dSpeed, double pMove, double dMove)

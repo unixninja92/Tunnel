@@ -19,7 +19,7 @@
 #define SHARED
 
 #define TUNNEL_WIDTH 100
-#define POLYGON_HEIGHT 75
+#define POLYGON_HEIGHT 76
 #define WIDTH_MODIFIER (TUNNEL_WIDTH/2)
 
 #include <QWidget>
