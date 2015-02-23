@@ -14,6 +14,7 @@
  *  limitations under the License.
  */
 #include "movingpolygons.h"
+#include <QDebug>
 
 MovingPolygons::MovingPolygons(share s, int speed, QObject *parent) :
     QObject(parent)
@@ -140,6 +141,7 @@ int MovingPolygons::getSize()
 
 void MovingPolygons::timerEvent(QTimerEvent *event)
 {
+//    qDebug() << size;
     if(event->timerId()==wallTimer){
         for(int i = 0; i<size; i++){
             queue.at(i).left->moveBy(0,1);
