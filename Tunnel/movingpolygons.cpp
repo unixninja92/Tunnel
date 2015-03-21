@@ -88,9 +88,6 @@ polygonBlock MovingPolygons::generateRandomPolyBlock()
         else
             rand = lastBlockTopLeft-TUNNEL_WIDTH;
     }
-//    else{
-//        rand = qrand()%((int)sceneWidth-TUNNEL_WIDTH -20)+10;
-//    }
 
     left << lStart
          << QPoint(0, yHigh)
@@ -103,7 +100,6 @@ polygonBlock MovingPolygons::generateRandomPolyBlock()
           << QPoint(rand+TUNNEL_WIDTH, yHigh)
           << QPoint(lastBlockTopLeft+TUNNEL_WIDTH, yLow)
           << rStart;
-
 
     lastBlockTopLeft = rand;
 
@@ -146,7 +142,6 @@ int MovingPolygons::getSize()
 
 void MovingPolygons::timerEvent(QTimerEvent *event)
 {
-//    qDebug() << size;
     if(event->timerId()==wallTimer){
         for(int i = 0; i<size; i++){
             queue.at(i).left->moveBy(0,move);

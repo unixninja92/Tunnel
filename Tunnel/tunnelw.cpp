@@ -30,7 +30,6 @@ TunnelW::TunnelW(QOpenGLWidget *parent) :
 
 TunnelW::~TunnelW()
 {
-//    cleanShared();
     delete ui;
 }
 
@@ -50,7 +49,6 @@ void TunnelW::startGame()
     shared.score = new Score(shared, shared.scene);
     shared.screen = new EndScreen(shared, this);
     shared.dot = new Dot(shared, dSpeed*.5, dMove, this);
-//    qDebug() << "HI!!";
 }
 
 void TunnelW::restartGame()

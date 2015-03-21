@@ -39,7 +39,6 @@ MainMenu::MainMenu(QWidget *parent) :
     connect(score, SIGNAL(released()), this, SLOT(scores()));
     connect(setting, SIGNAL(released()), this, SLOT(settings()));
 
-
     tunnel = new TunnelW();
     tunnel->menu = this;
 }
