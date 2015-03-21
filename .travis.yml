@@ -6,6 +6,7 @@ install:
  - sudo apt-get install -y qt54base qt54tools 
 
 script:
- - qmake -project
- - qmake Tunnel/Tunnel.pro
+ - qmake -qt=qt5 -v
+ - qmake -qt=qt5 -project
+ - qmake -qt=qt5 Tunnel/Tunnel.pro
  - make
