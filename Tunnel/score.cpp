@@ -39,7 +39,7 @@ void Score::updateScore()
 
 void Score::timerEvent(QTimerEvent *event)
 {
-    if(event->timerId()==scoreTimer){
+    if(!Share::isPaused && event->timerId()==scoreTimer){
         score++;
         updateScore();
     }

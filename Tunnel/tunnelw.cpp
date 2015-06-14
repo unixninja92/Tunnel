@@ -19,6 +19,8 @@
 #include "ui_tunnelw.h"
 #include <QDebug>
 
+bool Share::isPaused = false;
+
 TunnelW::TunnelW(QOpenGLWidget *parent) :
     QOpenGLWidget(parent),
     ui(new Ui::TunnelW)
@@ -49,6 +51,7 @@ void TunnelW::startGame()
     shared.score = new Score(shared, shared.scene);
     shared.screen = new EndScreen(shared, this);
     shared.dot = new Dot(shared, dSpeed*.5, dMove, this);
+    Share::isPaused = false;
 }
 
 void TunnelW::restartGame()
@@ -68,12 +71,19 @@ void TunnelW::cleanShared()
 
 void TunnelW::keyPressEvent(QKeyEvent *event)
 {
-    QApplication::sendEvent(shared.dot, event);
+    if(!Share::isPaused)
+        QApplication::sendEvent(shared.dot, event);
 }
 
 void TunnelW::keyReleaseEvent(QKeyEvent *event)
 {
-    QApplication::sendEvent(shared.dot, event);
+    if(event->key() == Qt::Key_P){
+        printf("p is pressed");
+        Share::isPaused = Share::isPaused == 1 ? 0 : 1;
+    }
+    else {
+        QApplication::sendEvent(shared.dot, event);
+    }
 }
 
 int TunnelW::getScore()
@@ -125,3 +135,15 @@ bool TunnelW::hasStarted()
 {
     return started;
 }
+
+//void TunnelW::pause()
+//{
+////    bool newVal =
+//      Share::isPaused = !Share::isPaused;
+////    shared.scene;
+////    shared.score;
+////    shared.screen;
+////    shared.walls;
+////    shared.dot;
+//}
+

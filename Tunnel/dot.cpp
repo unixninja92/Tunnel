@@ -32,35 +32,41 @@ Dot::Dot(share s, int speed, double m, QOpenGLWidget *parent) :
 
 void Dot::keyPressEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Comma) {
-        left = true;
-    }
-    else if(event->key() == Qt::Key_Period){
-        right = true;
+    if(!Share::isPaused) {
+        if(event->key() == Qt::Key_Comma) {
+            left = true;
+        }
+        else if(event->key() == Qt::Key_Period){
+            right = true;
+        }
     }
 }
 
 void Dot::keyReleaseEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Comma) {
-        left = false;
-    }
-    else if(event->key() == Qt::Key_Period){
-        right = false;
+    if(!Share::isPaused) {
+        if(event->key() == Qt::Key_Comma) {
+            left = false;
+        }
+        else if(event->key() == Qt::Key_Period){
+            right = false;
+        }
     }
 }
 
 void Dot::timerEvent(QTimerEvent *event)
 {
-    if(left) dot->moveBy(-move,0);
-    else if(right) dot->moveBy(move,0);
-    if(dot->collidesWithItem(shared.walls->getCurrentBlock().left) ||
-            dot->collidesWithItem(shared.walls->getNextBlock().left) ||
-            dot->collidesWithItem(shared.walls->getCurrentBlock().right) ||
-            dot->collidesWithItem(shared.walls->getNextBlock().right)) {
-        killTimer(timer);
-        shared.walls->killTime();
-        shared.score->killTime();
-        shared.screen->exec();
+    if(!Share::isPaused) {
+        if(left) dot->moveBy(-move,0);
+        else if(right) dot->moveBy(move,0);
+        if(dot->collidesWithItem(shared.walls->getCurrentBlock().left) ||
+                dot->collidesWithItem(shared.walls->getNextBlock().left) ||
+                dot->collidesWithItem(shared.walls->getCurrentBlock().right) ||
+                dot->collidesWithItem(shared.walls->getNextBlock().right)) {
+            killTimer(timer);
+            shared.walls->killTime();
+            shared.score->killTime();
+            shared.screen->exec();
+        }
     }
 }
