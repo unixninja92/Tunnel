@@ -10,3 +10,4 @@ Controls
 =======
 Move left: ,  
 Move right: .  
+Pause: p
