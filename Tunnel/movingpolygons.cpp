@@ -106,7 +106,8 @@ polygonBlock MovingPolygons::generateRandomPolyBlock()
     return generatePolygonBlock(left, right);
 }
 
-polygonBlock MovingPolygons::generatePolygonBlock(QPolygonF left, QPolygonF right)
+polygonBlock MovingPolygons::generatePolygonBlock(QPolygonF left,
+                                                  QPolygonF right)
 {
     polygonBlock newBlock;
 

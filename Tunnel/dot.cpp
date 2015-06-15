@@ -23,7 +23,8 @@ Dot::Dot(share s, int speed, double m, QOpenGLWidget *parent) :
     shared = s;
     dot =  (shared.scene->addEllipse(
                 shared.scene->width()/2-10,//x
-                ((shared.walls->getSize() - 4)*POLYGON_HEIGHT)-POLYGON_HEIGHT/2-10,//y
+                ((shared.walls->getSize() - 4)
+                 *POLYGON_HEIGHT)-POLYGON_HEIGHT/2-10,//y
                 DOT_DIAMETER, //width
                 DOT_DIAMETER, //height
                 QPen(Qt::blue), //outline

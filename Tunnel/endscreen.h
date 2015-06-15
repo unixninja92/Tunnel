@@ -26,10 +26,9 @@
 #include <tunnelw.h>
 
 /*
- * EndScreen is a popup box that apears when the user has
- * died/crashed into a wall giving them the option to either
- * play again on the same dificulty or be taken back to the
- * main menu.
+ *  EndScreen is a popup box that apears when the user has died/crashed into a
+ *  wall giving them the option to either play again on the same dificulty or be
+ *  taken back to the main menu.
  */
 class EndScreen : public QWidget
 {
