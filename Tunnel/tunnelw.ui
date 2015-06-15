@@ -38,9 +38,6 @@
       <enum>QLayout::SetMaximumSize</enum>
      </property>
      <item>
-      <widget class="QOpenGLWidget" name="openGLWidget"/>
-     </item>
-     <item>
       <widget class="QGraphicsView" name="view">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
