@@ -77,13 +77,10 @@ void TunnelW::keyPressEvent(QKeyEvent *event)
 
 void TunnelW::keyReleaseEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_P){
-        printf("p is pressed");
-        Share::isPaused = Share::isPaused == 1 ? 0 : 1;
-    }
-    else {
+    if(event->key() == Qt::Key_P)
+        Share::isPaused = !Share::isPaused;
+    else
         QApplication::sendEvent(shared.dot, event);
-    }
 }
 
 int TunnelW::getScore()
