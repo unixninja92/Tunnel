@@ -26,8 +26,8 @@ EndScreen::EndScreen(share s, TunnelW* t, QWidget *parent) :
     tun = t;
     endBox = new QMessageBox(tun->menu);
     endBox->setText("Score ");
-    menu = endBox->addButton("Main menu",QMessageBox::DestructiveRole);
-    again = endBox->addButton("Play again", QMessageBox::ResetRole);
+    menuButton = endBox->addButton("Main menu",QMessageBox::DestructiveRole);
+    againButton = endBox->addButton("Play again", QMessageBox::ResetRole);
 }
 
 void EndScreen::exec()
@@ -41,10 +41,10 @@ void EndScreen::exec()
     QString text = "Score: " + score;
     endBox->setText(text);
     endBox->exec();
-    if(endBox->clickedButton() == again){
+    if(endBox->clickedButton() == againButton){
         tun->restartGame();
     }
-    else if(endBox->clickedButton() == menu){
+    else if(endBox->clickedButton() == menuButton){
         tun->hide();
         tun->menu->show();
     }
