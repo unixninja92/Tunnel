@@ -14,6 +14,8 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ *  @author unixninja92
  */
 #ifndef ENDSCREEN_H
 #define ENDSCREEN_H
@@ -23,7 +25,12 @@
 #include <shared.h>
 #include <tunnelw.h>
 
-
+/*
+ * EndScreen is a popup box that apears when the user has
+ * died/crashed into a wall giving them the option to either
+ * play again on the same dificulty or be taken back to the
+ * main menu.
+ */
 class EndScreen : public QWidget
 {
     Q_OBJECT
@@ -34,8 +41,8 @@ public:
 private:
     share shared;
     QPointer<QMessageBox> endBox;
-    QPointer<QAbstractButton> menu;
-    QPointer<QAbstractButton> again;
+    QPointer<QAbstractButton> menuButton;
+    QPointer<QAbstractButton> againButton;
     QPointer<TunnelW> tun;
 };
 

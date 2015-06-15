@@ -68,6 +68,12 @@ void MainMenu::insaneMode()
     start(6, 4, 5, 6);
 }
 
+/*
+ * pSpeed is the speed of polygonBlocks
+ * pMove is how many pixles they move each cycle
+ * dSpeed is the speed of the dot
+ * dMove is how many pixles the dot moves each cycle
+ */
 void MainMenu::start(int pSpeed, int dSpeed, double pMove, double dMove)
 {
     tunnel->show();

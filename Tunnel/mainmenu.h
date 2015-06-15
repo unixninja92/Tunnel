@@ -1,5 +1,5 @@
 /*
- * Tunnel Copyright 2015 unixninja92
+ *  Tunnel Copyright 2015 unixninja92
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -14,6 +14,8 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ *  @author unixninja92
  */
 #ifndef MAINMENU_H
 #define MAINMENU_H
@@ -26,6 +28,11 @@ namespace Ui {
 class MainMenu;
 }
 
+/*
+ *  MainMenu is the main screen that appears when the user starts
+ *  Tunnel. It has options for starting a game at each difficulty
+ *  and button for navigating to the score boards and settings menu.
+ */
 class MainMenu : public QMainWindow
 {
     Q_OBJECT
@@ -53,6 +60,8 @@ private:
     QPushButton *insane;
     QPushButton *score;
     QPushButton *setting;
+
+    //starts a game with the given difficulty parameters
     void start(int, int, double, double);
 };
 

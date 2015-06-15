@@ -21,23 +21,27 @@ Dot::Dot(share s, int speed, double m, QOpenGLWidget *parent) :
     QOpenGLWidget(parent)
 {
     shared = s;
-    dot =  (shared.scene->addEllipse(shared.scene->width()/2-10,
-                            ((shared.walls->getSize() - 4)*POLYGON_HEIGHT)-POLYGON_HEIGHT/2-10,
-                            DOT_DIAMETER, DOT_DIAMETER, QPen(Qt::blue),QBrush(Qt::blue)));
-    left = false;
-    right = false;
+    dot =  (shared.scene->addEllipse(
+                shared.scene->width()/2-10,//x
+                ((shared.walls->getSize() - 4)*POLYGON_HEIGHT)-POLYGON_HEIGHT/2-10,//y
+                DOT_DIAMETER, //width
+                DOT_DIAMETER, //height
+                QPen(Qt::blue), //outline
+                QBrush(Qt::blue)));//fill
+    moveLeft = false;
+    moveRight = false;
     timer = startTimer(speed);
-    move = m;
+    pixlesToMove = m;
 }
 
 void Dot::keyPressEvent(QKeyEvent *event)
 {
     if(!Share::isPaused) {
         if(event->key() == Qt::Key_Comma) {
-            left = true;
+            moveLeft = true;
         }
         else if(event->key() == Qt::Key_Period){
-            right = true;
+            moveRight = true;
         }
     }
 }
@@ -46,10 +50,10 @@ void Dot::keyReleaseEvent(QKeyEvent *event)
 {
     if(!Share::isPaused) {
         if(event->key() == Qt::Key_Comma) {
-            left = false;
+            moveLeft = false;
         }
         else if(event->key() == Qt::Key_Period){
-            right = false;
+            moveRight = false;
         }
     }
 }
@@ -57,8 +61,8 @@ void Dot::keyReleaseEvent(QKeyEvent *event)
 void Dot::timerEvent(QTimerEvent *event)
 {
     if(!Share::isPaused) {
-        if(left) dot->moveBy(-move,0);
-        else if(right) dot->moveBy(move,0);
+        if(moveLeft) dot->moveBy(-pixlesToMove,0);
+        else if(moveRight) dot->moveBy(pixlesToMove,0);
         if(dot->collidesWithItem(shared.walls->getCurrentBlock().left) ||
                 dot->collidesWithItem(shared.walls->getNextBlock().left) ||
                 dot->collidesWithItem(shared.walls->getCurrentBlock().right) ||

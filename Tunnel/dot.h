@@ -1,5 +1,5 @@
 /*
- * Tunnel Copyright 2015 unixninja92
+ *  Tunnel Copyright 2015 unixninja92
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -14,6 +14,8 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ *  @author unixninja92
  */
 #ifndef DOT_H
 #define DOT_H
@@ -27,6 +29,10 @@
 
 #define DOT_DIAMETER TUNNEL_WIDTH/5
 
+/*
+ *  Dot creates and moves the ship that the user is controlling
+ *  back and forth on screen based on keyboard events.
+ */
 class Dot : public QOpenGLWidget
 {
     Q_OBJECT
@@ -45,10 +51,10 @@ protected:
 private:
     share shared;
     QGraphicsEllipseItem* dot;
-    bool left;
-    bool right;
+    bool moveLeft;
+    bool moveRight;
     int timer;
-    double move;
+    double pixlesToMove;
 };
 
 #endif // DOT_H
