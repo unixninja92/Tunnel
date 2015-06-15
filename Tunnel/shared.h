@@ -39,10 +39,7 @@ class Dot;
 class EndScreen;
 class TunnelW;
 
-//static bool isPaused;
-
 typedef struct Share{
-//    Share() : isPaused(false) {}
     QPointer<QGraphicsScene> scene;
     QPointer<MovingPolygons> walls;
     QPointer<Score> score;

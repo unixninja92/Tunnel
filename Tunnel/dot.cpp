@@ -23,7 +23,7 @@ Dot::Dot(share s, int speed, double m, QOpenGLWidget *parent) :
     shared = s;
     dot =  (shared.scene->addEllipse(shared.scene->width()/2-10,
                             ((shared.walls->getSize() - 4)*POLYGON_HEIGHT)-POLYGON_HEIGHT/2-10,
-                            20, 20, QPen(Qt::blue),QBrush(Qt::blue)));
+                            DOT_DIAMETER, DOT_DIAMETER, QPen(Qt::blue),QBrush(Qt::blue)));
     left = false;
     right = false;
     timer = startTimer(speed);

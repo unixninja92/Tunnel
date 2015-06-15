@@ -25,6 +25,8 @@
 #include <score.h>
 #include <endscreen.h>
 
+#define DOT_DIAMETER TUNNEL_WIDTH/5
+
 class Dot : public QOpenGLWidget
 {
     Q_OBJECT

@@ -135,15 +135,3 @@ bool TunnelW::hasStarted()
 {
     return started;
 }
-
-//void TunnelW::pause()
-//{
-////    bool newVal =
-//      Share::isPaused = !Share::isPaused;
-////    shared.scene;
-////    shared.score;
-////    shared.screen;
-////    shared.walls;
-////    shared.dot;
-//}
-
