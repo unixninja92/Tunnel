@@ -1,5 +1,5 @@
 /*
- * Tunnel Copyright 2015 unixninja92
+ *  Tunnel Copyright 2015 unixninja92
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -14,6 +14,8 @@
  *  You should have received a copy of the GNU General Public License along
  *  with this program; if not, write to the Free Software Foundation, Inc.,
  *  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ *
+ *  @author unixninja92
  */
 #ifndef SCORE_H
 #define SCORE_H
@@ -21,12 +23,18 @@
 #include <QObject>
 #include <shared.h>
 
+/*
+ *  Score is a timer that keeps tack of how long the player has survived so far
+ *  in seconds. It updates a text field in the GUI with the current score.
+ */
 class Score : public QObject
 {
     Q_OBJECT
 public:
     explicit Score(share, QObject *parent=0);
+    //stops timer
     void killTime();
+    //updates the GUI
     void updateScore();
     int getScore();
 
