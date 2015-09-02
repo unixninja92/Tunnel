@@ -18,6 +18,7 @@
 #include "movingpolygons.h"
 #include <QDebug>
 #include <math.h>
+#include <ctime>
 
 MovingPolygons::MovingPolygons(share s, int speed, double m, QObject *parent) :
     QObject(parent)
