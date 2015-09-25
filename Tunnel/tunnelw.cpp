@@ -81,10 +81,14 @@ void TunnelW::cleanShared()
 void TunnelW::keyPressEvent(QKeyEvent *event)
 {
     if(!Share::isPaused) {
-        if(event->key() == Qt::Key_Comma) {
+        if(event->key() == Qt::Key_Comma ||
+                event->key() == Qt::Key_Left ||
+                event->key() == Qt::Key_A) {
                     moveLeft = true;
         }
-        else if(event->key() == Qt::Key_Period){
+        else if(event->key() == Qt::Key_Period ||
+                event->key() == Qt::Key_Right ||
+                event->key() == Qt::Key_D){
             moveRight = true;
         }
     }
@@ -92,10 +96,14 @@ void TunnelW::keyPressEvent(QKeyEvent *event)
 
 void TunnelW::keyReleaseEvent(QKeyEvent *event)
 {
-    if(event->key() == Qt::Key_Comma) {
+    if(event->key() == Qt::Key_Comma ||
+            event->key() == Qt::Key_Left ||
+            event->key() == Qt::Key_A) {
         moveLeft = false;
     }
-    else if(event->key() == Qt::Key_Period){
+    else if(event->key() == Qt::Key_Period ||
+            event->key() == Qt::Key_Right ||
+            event->key() == Qt::Key_D){
         moveRight = false;
     }
 }
