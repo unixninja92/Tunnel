@@ -19,6 +19,7 @@
 #define SHARED
 
 #define TUNNEL_WIDTH 100
+#define DOT_DIAMETER TUNNEL_WIDTH/5
 #define POLYGON_HEIGHT 76
 #define WIDTH_MODIFIER (TUNNEL_WIDTH/2)
 
@@ -43,7 +44,7 @@ typedef struct Share{
     QPointer<QGraphicsScene> scene;
     QPointer<MovingPolygons> walls;
     QPointer<Score> score;
-    QPointer<Dot> dot;
+    QGraphicsEllipseItem* dot;
     QPointer<EndScreen> screen;
     static bool isPaused;
 }share;

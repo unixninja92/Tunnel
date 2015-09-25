@@ -33,7 +33,6 @@ MovingPolygons::MovingPolygons(share s, int speed, double m, QObject *parent) :
         queue.append(generateStraightCenterPolyBlock(i-1));
     }
     count = 0;
-    wallTimer = startTimer(speed);
     qsrand(time(NULL));
 
     move = m;
@@ -142,21 +141,14 @@ int MovingPolygons::getSize()
     return size;
 }
 
-void MovingPolygons::timerEvent(QTimerEvent *event)
+void MovingPolygons::tick()
 {
-    if(!Share::isPaused) {
-        if(event->timerId()==wallTimer){
-            for(int i = 0; i<size; i++){
-                queue.at(i).left->moveBy(0,move);
-                queue.at(i).right->moveBy(0,move);
-            }
-            count++;
-            if(count%((int)floor(POLYGON_HEIGHT/move))==0) rotate();
-        }
+    for(int i = 0; i<size; i++){
+        queue.at(i).left->moveBy(0,move);
+        queue.at(i).right->moveBy(0,move);
     }
+    count++;
+    if(count%((int)floor(POLYGON_HEIGHT/move))==0)
+        rotate();
 }
 
-void MovingPolygons::killTime()
-{
-    killTimer(wallTimer);
-}

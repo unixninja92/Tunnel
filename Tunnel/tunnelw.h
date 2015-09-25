@@ -19,8 +19,11 @@
 #define TUNNELW_H
 
 #include <shared.h>
-#include <dot.h>
+//#include <dot.h>
 #include <mainmenu.h>
+#include <movingpolygons.h>
+#include <score.h>
+#include <endscreen.h>
 
 class MainMenu;
 
@@ -49,6 +52,7 @@ public:
 protected:
     void keyPressEvent(QKeyEvent *);
     void keyReleaseEvent(QKeyEvent *);
+    void timerEvent(QTimerEvent *);
 
 private:
     Ui::TunnelW *ui;
@@ -59,6 +63,9 @@ private:
     int pSpeed;
     double dMove;
     double pMove;
+    bool moveLeft;
+    bool moveRight;
+    int frameTimer;
 };
 
 #endif // TUNNELW_H

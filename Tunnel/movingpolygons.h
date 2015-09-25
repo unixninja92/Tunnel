@@ -35,10 +35,7 @@ public:
     polygonBlock getNextBlock();
     int getSize();
     void rotate();
-    void killTime();
-
-protected:
-    void timerEvent(QTimerEvent *event);
+    void tick();
 
 private:
     share shared;
@@ -50,7 +47,6 @@ private:
     qreal lastBlockTopLeft;
     int size;
     int count;
-    int wallTimer;
     double move;
 };
 

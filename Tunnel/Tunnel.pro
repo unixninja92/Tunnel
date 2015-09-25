@@ -15,14 +15,12 @@ SOURCES += main.cpp\
         tunnelw.cpp \
     score.cpp \
     movingpolygons.cpp \
-    dot.cpp \
     endscreen.cpp \
     mainmenu.cpp
 
 HEADERS  += tunnelw.h \
     score.h \
     movingpolygons.h \
-    dot.h \
     shared.h \
     endscreen.h \
     mainmenu.h
@@ -38,5 +36,9 @@ DISTFILES += \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew \
     android/gradlew.bat
+
+macx {
+QMAKE_MAC_SDK = macosx10.11
+}
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
