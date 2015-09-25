@@ -61,7 +61,7 @@ void TunnelW::startGame()
     Share::isPaused = false;
     moveLeft = false;
     moveRight = false;
-    frameTimer = startTimer(1000/200);
+    frameTimer = startTimer(1000/100);
 }
 
 void TunnelW::restartGame()
@@ -76,7 +76,6 @@ void TunnelW::cleanShared()
     delete shared.score;
     delete shared.screen;
     delete shared.walls;
-//    delete shared.dot;
 }
 
 void TunnelW::keyPressEvent(QKeyEvent *event)
