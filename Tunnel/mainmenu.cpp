@@ -50,7 +50,7 @@ MainMenu::~MainMenu()
 
 void MainMenu::easyMode()
 {
-    start(100, 1, 2);
+    start(100, 1, 1);
 }
 
 void MainMenu::medMode()
@@ -60,12 +60,12 @@ void MainMenu::medMode()
 
 void MainMenu::hardMode()
 {
-    start(100, 4, 5);
+    start(96, 4, 4);
 }
 
 void MainMenu::insaneMode()
 {
-    start(100, 5, 5);
+    start(90, 5, 5);
 }
 
 /*
