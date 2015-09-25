@@ -43,10 +43,6 @@ class TunnelW;
 
 typedef struct Share{
     QPointer<QGraphicsScene> scene;
-    QPointer<MovingPolygons> walls;
-    QPointer<Score> score;
-    QGraphicsEllipseItem* dot;
-    QPointer<EndScreen> screen;
     static bool isPaused;
 }share;
 

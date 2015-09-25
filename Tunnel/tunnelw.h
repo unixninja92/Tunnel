@@ -52,6 +52,10 @@ protected:
 
 private:
     Ui::TunnelW *ui;
+    QPointer<MovingPolygons> walls;
+    QPointer<Score> score;
+    QGraphicsEllipseItem* dot;
+    QPointer<EndScreen> screen;
     void createScene(int w, int h);
     share shared;
     bool started;

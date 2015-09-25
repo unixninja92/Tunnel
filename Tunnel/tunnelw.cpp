@@ -47,12 +47,12 @@ void TunnelW::startGame()
 {
     started = true;
     createScene(ui->view->size().width(), ui->view->size().height());
-    shared.walls = new MovingPolygons(shared, pMove, shared.scene);
-    shared.score = new Score(shared, shared.scene);
-    shared.screen = new EndScreen(shared, this);
-    shared.dot = shared.scene->addEllipse(
+    walls = new MovingPolygons(shared, pMove, shared.scene);
+    score = new Score(shared, shared.scene);
+    screen = new EndScreen(shared, this);
+    dot = shared.scene->addEllipse(
                     shared.scene->width()/2-10,//x
-                    ((shared.walls->getSize() - 4)
+                    ((walls->getSize() - 4)
                      *POLYGON_HEIGHT)-POLYGON_HEIGHT/2-10,//y
                     DOT_DIAMETER, //width
                     DOT_DIAMETER, //height
@@ -67,15 +67,15 @@ void TunnelW::startGame()
 void TunnelW::restartGame()
 {
     cleanShared();
+    delete score;
+    delete screen;
+    delete walls;
     startGame();
 }
 
 void TunnelW::cleanShared()
 {
     delete shared.scene;
-    delete shared.score;
-    delete shared.screen;
-    delete shared.walls;
 }
 
 void TunnelW::keyPressEvent(QKeyEvent *event)
@@ -103,23 +103,23 @@ void TunnelW::keyReleaseEvent(QKeyEvent *event)
 void TunnelW::timerEvent(QTimerEvent *)
 {
     if(!Share::isPaused) {
-        shared.walls->tick();
-        if(moveLeft) shared.dot->moveBy(-dMove,0);
-        else if(moveRight) shared.dot->moveBy(dMove,0);
-        if(shared.dot->collidesWithItem(shared.walls->getCurrentBlock().left) ||
-                shared.dot->collidesWithItem(shared.walls->getNextBlock().left) ||
-                shared.dot->collidesWithItem(shared.walls->getCurrentBlock().right) ||
-                shared.dot->collidesWithItem(shared.walls->getNextBlock().right)) {
+        walls->tick();
+        if(moveLeft) dot->moveBy(-dMove,0);
+        else if(moveRight) dot->moveBy(dMove,0);
+        if(dot->collidesWithItem(walls->getCurrentBlock().left) ||
+                dot->collidesWithItem(walls->getNextBlock().left) ||
+                dot->collidesWithItem(walls->getCurrentBlock().right) ||
+                dot->collidesWithItem(walls->getNextBlock().right)) {
             killTimer(frameTimer);
-            shared.score->killTime();
-            shared.screen->exec();
+            score->killTime();
+            screen->exec();
         }
     }
 }
 
 int TunnelW::getScore()
 {
-    return shared.score->getScore();
+    return score->getScore();
 }
 
 double TunnelW::getPMove()
