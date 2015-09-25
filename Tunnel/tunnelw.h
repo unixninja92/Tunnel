@@ -40,6 +40,7 @@ public:
     int getScore();
     MainMenu *menu;
     bool hasStarted();
+    void setPHeight(int);
     void setDMove(double);
     double getDMove();
     void setPMove(double);

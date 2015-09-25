@@ -27,7 +27,7 @@ MovingPolygons::MovingPolygons(share s, double m, QObject *parent) :
     sceneWidth = shared.scene->width();
     sceneMidWidth = sceneWidth/2;
     sceneHeight = shared.scene->height();
-    size = sceneHeight/POLYGON_HEIGHT+3;
+    size = sceneHeight/shared.pHeight+3;
     queue = *new QList<polygonBlock>();
     for(int i = 0; i < size; i++){
         queue.append(generateStraightCenterPolyBlock(i-1));
@@ -42,8 +42,8 @@ polygonBlock MovingPolygons::generateStraightCenterPolyBlock(int pos)
 {
     QPolygonF left;
     QPolygonF right;
-    int yLow = POLYGON_HEIGHT*(pos+1);
-    int yHigh = POLYGON_HEIGHT*pos;
+    int yLow = shared.pHeight*(pos+1);
+    int yHigh = shared.pHeight*pos;
     QPoint lStart = QPoint(0,yLow);
     QPoint rStart = QPoint(sceneWidth,yLow);
 
@@ -69,7 +69,7 @@ polygonBlock MovingPolygons::generateRandomPolyBlock()
     QPolygonF right;
     int rand;
     int yLow = 0;
-    int yHigh = -POLYGON_HEIGHT;
+    int yHigh = -shared.pHeight;
     QPoint lStart = QPoint(0,yLow);
     QPoint rStart = QPoint(sceneWidth,yLow);
 
@@ -148,7 +148,7 @@ void MovingPolygons::tick()
         queue.at(i).right->moveBy(0,move);
     }
     count++;
-    if(count%((int)floor(POLYGON_HEIGHT/move))==0)
+    if(count%((int)floor(shared.pHeight/move))==0)
         rotate();
 }
 

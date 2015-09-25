@@ -20,7 +20,7 @@
 
 #define TUNNEL_WIDTH 100
 #define DOT_DIAMETER (TUNNEL_WIDTH/5)
-#define POLYGON_HEIGHT 76
+
 #define WIDTH_MODIFIER (TUNNEL_WIDTH/2)
 #define FRAMES_PER_SECOND 100
 
@@ -42,6 +42,7 @@ class TunnelW;
 
 typedef struct Share{
     QPointer<QGraphicsScene> scene;
+    int pHeight;
     static bool isPaused;
 }share;
 

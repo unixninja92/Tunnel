@@ -53,7 +53,7 @@ void TunnelW::startGame()
     dot = shared.scene->addEllipse(
                     shared.scene->width()/2-10,//x
                     ((walls->getSize() - 4)
-                     *POLYGON_HEIGHT)-POLYGON_HEIGHT/2-10,//y
+                     *shared.pHeight)-shared.pHeight/2-10,//y
                     DOT_DIAMETER, //width
                     DOT_DIAMETER, //height
                     QPen(Qt::blue), //outline
@@ -100,10 +100,13 @@ void TunnelW::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
+/*
+ * Updates the screen every frame
+ */
 void TunnelW::timerEvent(QTimerEvent *)
 {
     if(!Share::isPaused) {
-        walls->tick();
+        walls->tick();//moves wall
         if(moveLeft) dot->moveBy(-dMove,0);
         else if(moveRight) dot->moveBy(dMove,0);
         if(dot->collidesWithItem(walls->getCurrentBlock().left) ||
@@ -120,6 +123,11 @@ void TunnelW::timerEvent(QTimerEvent *)
 int TunnelW::getScore()
 {
     return score->getScore();
+}
+
+void TunnelW::setPHeight(int h)
+{
+    shared.pHeight = h;
 }
 
 double TunnelW::getPMove()

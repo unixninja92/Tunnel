@@ -50,32 +50,34 @@ MainMenu::~MainMenu()
 
 void MainMenu::easyMode()
 {
-    start(1, 2);
+    start(100, 1, 2);
 }
 
 void MainMenu::medMode()
 {
-    start(2, 3);
+    start(100, 2, 3);
 }
 
 void MainMenu::hardMode()
 {
-    start(4, 5);
+    start(100, 4, 5);
 }
 
 void MainMenu::insaneMode()
 {
-    start(5, 6);
+    start(100, 5, 5);
 }
 
 /*
+ * pHeight is the heght of each wall block
  * pMove is how many pixles the polygonBlocks move each frame
  * dMove is how many pixles the dot moves each frame
  */
-void MainMenu::start(double pMove, double dMove)
+void MainMenu::start(int pHeight, double pMove, double dMove)
 {
     tunnel->show();
     this->hide();
+    tunnel->setPHeight(pHeight);
     tunnel->setPMove(pMove);
     tunnel->setDMove(dMove);
     if(!tunnel->hasStarted())

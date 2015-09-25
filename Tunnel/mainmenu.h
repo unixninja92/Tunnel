@@ -62,7 +62,7 @@ private:
     QPushButton *setting;
 
     //starts a game with the given difficulty parameters
-    void start(double, double);
+    void start(int, double, double);
 };
 
 #endif // MAINMENU_H
