@@ -50,37 +50,33 @@ MainMenu::~MainMenu()
 
 void MainMenu::easyMode()
 {
-    start(30, 25, 1, 2);
+    start(1, 2);
 }
 
 void MainMenu::medMode()
 {
-    start(20, 10, 2, 3);
+    start(2, 3);
 }
 
 void MainMenu::hardMode()
 {
-    start(6, 4, 4, 5);
+    start(4, 5);
 }
 
 void MainMenu::insaneMode()
 {
-    start(6, 4, 5, 6);
+    start(5, 6);
 }
 
 /*
- * pSpeed is the speed of polygonBlocks
- * pMove is how many pixles they move each cycle
- * dSpeed is the speed of the dot
- * dMove is how many pixles the dot moves each cycle
+ * pMove is how many pixles the polygonBlocks move each frame
+ * dMove is how many pixles the dot moves each frame
  */
-void MainMenu::start(int pSpeed, int dSpeed, double pMove, double dMove)
+void MainMenu::start(double pMove, double dMove)
 {
     tunnel->show();
     this->hide();
-    tunnel->setPSpeed(pSpeed);
     tunnel->setPMove(pMove);
-    tunnel->setDSpeed(dSpeed);
     tunnel->setDMove(dMove);
     if(!tunnel->hasStarted())
         tunnel->startGame();

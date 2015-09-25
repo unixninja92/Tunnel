@@ -28,7 +28,7 @@ class MovingPolygons : public QObject
 {
     Q_OBJECT
 public:
-    explicit MovingPolygons(share, int, double, QObject *parent = 0);
+    explicit MovingPolygons(share, double, QObject *parent = 0);
     polygonBlock generateStraightCenterPolyBlock(int pos = -1);
     polygonBlock generateRandomPolyBlock();
     polygonBlock getCurrentBlock();

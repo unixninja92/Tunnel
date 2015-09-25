@@ -40,10 +40,6 @@ public:
     int getScore();
     MainMenu *menu;
     bool hasStarted();
-    void setPSpeed(int);
-    int getPSpeed();
-    void setDSpeed(int);
-    int getDSpeed();
     void setDMove(double);
     double getDMove();
     void setPMove(double);
@@ -59,8 +55,6 @@ private:
     void createScene(int w, int h);
     share shared;
     bool started;
-    int dSpeed;
-    int pSpeed;
     double dMove;
     double pMove;
     bool moveLeft;

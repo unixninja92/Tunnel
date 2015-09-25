@@ -20,7 +20,7 @@
 #include <math.h>
 #include <ctime>
 
-MovingPolygons::MovingPolygons(share s, int speed, double m, QObject *parent) :
+MovingPolygons::MovingPolygons(share s, double m, QObject *parent) :
     QObject(parent)
 {
     shared = s;

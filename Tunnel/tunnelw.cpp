@@ -47,7 +47,7 @@ void TunnelW::startGame()
 {
     started = true;
     createScene(ui->view->size().width(), ui->view->size().height());
-    shared.walls = new MovingPolygons(shared, pSpeed, pMove, shared.scene);
+    shared.walls = new MovingPolygons(shared, pMove, shared.scene);
     shared.score = new Score(shared, shared.scene);
     shared.screen = new EndScreen(shared, this);
     shared.dot = shared.scene->addEllipse(
@@ -120,26 +120,6 @@ void TunnelW::timerEvent(QTimerEvent *)
 int TunnelW::getScore()
 {
     return shared.score->getScore();
-}
-
-int TunnelW::getPSpeed()
-{
-    return pSpeed;
-}
-
-void TunnelW::setPSpeed(int s)
-{
-    pSpeed = s;
-}
-
-int TunnelW::getDSpeed()
-{
-    return dSpeed;
-}
-
-void TunnelW::setDSpeed(int s)
-{
-    dSpeed = s;
 }
 
 double TunnelW::getPMove()
