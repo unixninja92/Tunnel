@@ -26,8 +26,9 @@ EndScreen::EndScreen(share s, TunnelW* t, QWidget *parent) :
     tun = t;
     endBox = new QMessageBox(tun->menu);
     endBox->setText("Score ");
-    menuButton = endBox->addButton("Main menu",QMessageBox::DestructiveRole);
-    againButton = endBox->addButton("Play again", QMessageBox::ResetRole);
+    menuButton = endBox->addButton("Main menu",QMessageBox::NoRole);
+    againButton = endBox->addButton("Play again", QMessageBox::AcceptRole);
+
 }
 
 void EndScreen::exec()

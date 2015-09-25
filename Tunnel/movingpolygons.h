@@ -24,6 +24,11 @@
 #include <QList>
 #include <shared.h>
 
+typedef struct polygonBlock {
+    QGraphicsPolygonItem* left;
+    QGraphicsPolygonItem* right;
+}polygonBlock;
+
 class MovingPolygons : public QObject
 {
     Q_OBJECT

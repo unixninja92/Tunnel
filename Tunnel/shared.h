@@ -19,7 +19,7 @@
 #define SHARED
 
 #define TUNNEL_WIDTH 100
-#define DOT_DIAMETER TUNNEL_WIDTH/5
+#define DOT_DIAMETER (TUNNEL_WIDTH/5)
 #define POLYGON_HEIGHT 76
 #define WIDTH_MODIFIER (TUNNEL_WIDTH/2)
 #define FRAMES_PER_SECOND 100
@@ -37,7 +37,6 @@
 
 class MovingPolygons;
 class Score;
-class Dot;
 class EndScreen;
 class TunnelW;
 
@@ -45,11 +44,6 @@ typedef struct Share{
     QPointer<QGraphicsScene> scene;
     static bool isPaused;
 }share;
-
-typedef struct polygonBlock {
-    QGraphicsPolygonItem* left;
-    QGraphicsPolygonItem* right;
-}polygonBlock;
 
 namespace Ui {
 class TunnelW;
