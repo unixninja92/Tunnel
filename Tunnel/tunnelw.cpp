@@ -114,7 +114,7 @@ void TunnelW::keyReleaseEvent(QKeyEvent *event)
 void TunnelW::timerEvent(QTimerEvent *)
 {
     if(!Share::isPaused) {
-        walls->tick();//moves wall
+//        walls->tick();//moves wall
         if(moveLeft) dot->moveBy(-dMove,0);
         else if(moveRight) dot->moveBy(dMove,0);
         if(dot->collidesWithItem(walls->getCurrentBlock().left) ||
@@ -122,6 +122,7 @@ void TunnelW::timerEvent(QTimerEvent *)
                 dot->collidesWithItem(walls->getCurrentBlock().right) ||
                 dot->collidesWithItem(walls->getNextBlock().right)) {
             killTimer(frameTimer);
+            walls->killTime();
             score->killTime();
             screen->exec();
         }

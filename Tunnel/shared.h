@@ -21,7 +21,7 @@
 #define TUNNEL_WIDTH 100
 #define DOT_DIAMETER (TUNNEL_WIDTH/5)
 #define WIDTH_MODIFIER (TUNNEL_WIDTH/2)
-#define FRAMES_PER_SECOND 100
+#define FRAMES_PER_SECOND 60
 
 #include <QWidget>
 #include <QOpenGLWidget>

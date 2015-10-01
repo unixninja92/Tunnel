@@ -41,6 +41,10 @@ public:
     int getSize();
     void rotate();
     void tick();
+    void killTime();
+
+protected:
+    void timerEvent(QTimerEvent *event);
 
 private:
     share shared;
@@ -52,6 +56,7 @@ private:
     qreal lastBlockTopLeft;
     int size;
     int count;
+    int wallTimer;
     double move;
 };
 
