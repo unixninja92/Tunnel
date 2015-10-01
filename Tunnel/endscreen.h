@@ -43,6 +43,7 @@ private:
     QPointer<QAbstractButton> menuButton;
     QPointer<QAbstractButton> againButton;
     QPointer<TunnelW> tun;
+    QSettings settings;
 };
 
 #endif // ENDSCREEN_H

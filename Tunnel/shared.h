@@ -33,6 +33,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsPolygonItem>
 #include <QGraphicsEllipseItem>
+#include <QSettings>
 
 class MovingPolygons;
 class Score;
@@ -44,6 +45,13 @@ typedef struct Share{
     int pHeight;
     static bool isPaused;
 }share;
+
+enum Level {
+    Easy,
+    Medium,
+    Hard,
+    Insane
+};
 
 namespace Ui {
 class TunnelW;

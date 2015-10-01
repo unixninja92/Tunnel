@@ -50,22 +50,22 @@ MainMenu::~MainMenu()
 
 void MainMenu::easyMode()
 {
-    start(100, 1, 1);
+    start(100, 1, 1, Easy);
 }
 
 void MainMenu::medMode()
 {
-    start(100, 2, 3);
+    start(100, 2, 3, Medium);
 }
 
 void MainMenu::hardMode()
 {
-    start(96, 4, 4);
+    start(96, 4, 4, Hard);
 }
 
 void MainMenu::insaneMode()
 {
-    start(112, 7, 5);
+    start(112, 7, 5, Insane);
 }
 
 /*
@@ -73,7 +73,7 @@ void MainMenu::insaneMode()
  * pMove is how many pixles the polygonBlocks move each frame
  * dMove is how many pixles the dot moves each frame
  */
-void MainMenu::start(int pHeight, double pMove, double dMove)
+void MainMenu::start(int pHeight, double pMove, double dMove, Level l)
 {
     tunnel->show();
     this->hide();
@@ -81,7 +81,7 @@ void MainMenu::start(int pHeight, double pMove, double dMove)
     tunnel->setPMove(pMove);
     tunnel->setDMove(dMove);
     if(!tunnel->hasStarted())
-        tunnel->startGame();
+        tunnel->startGame(l);
     else
         tunnel->restartGame();
 }

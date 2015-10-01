@@ -34,7 +34,7 @@ class TunnelW : public QOpenGLWidget
 public:
     explicit TunnelW(QOpenGLWidget *parent = 0);
     ~TunnelW();
-    void startGame();
+    void startGame(Level level);
     void restartGame();
     void cleanShared();
     int getScore();
@@ -57,7 +57,9 @@ private:
     QPointer<Score> score;
     QGraphicsEllipseItem* dot;
     QPointer<EndScreen> screen;
+    QSettings settings;
     void createScene(int w, int h);
+    void endGame();
     share shared;
     bool started;
     double dMove;
@@ -65,6 +67,7 @@ private:
     bool moveLeft;
     bool moveRight;
     int frameTimer;
+    Level level;
 };
 
 #endif // TUNNELW_H

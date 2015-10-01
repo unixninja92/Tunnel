@@ -18,6 +18,7 @@
 #include "tunnelw.h"
 #include "ui_tunnelw.h"
 #include <QDebug>
+#include <QSettings>
 
 bool Share::isPaused = false;
 
@@ -43,8 +44,9 @@ void TunnelW::createScene(int w, int h)
     shared.scene->setBackgroundBrush(Qt::gray);
 }
 
-void TunnelW::startGame()
+void TunnelW::startGame(Level l)
 {
+    level = l;
     started = true;
     createScene(ui->view->size().width(), ui->view->size().height());
     walls = new MovingPolygons(shared, pMove, shared.scene);
@@ -70,7 +72,7 @@ void TunnelW::restartGame()
     delete score;
     delete screen;
     delete walls;
-    startGame();
+    startGame(level);
 }
 
 void TunnelW::cleanShared()
@@ -121,11 +123,34 @@ void TunnelW::timerEvent(QTimerEvent *)
                 dot->collidesWithItem(walls->getNextBlock().left) ||
                 dot->collidesWithItem(walls->getCurrentBlock().right) ||
                 dot->collidesWithItem(walls->getNextBlock().right)) {
-            killTimer(frameTimer);
-            walls->killTime();
-            score->killTime();
-            screen->exec();
+            endGame();
         }
+    }
+}
+
+void TunnelW::endGame()
+{
+    killTimer(frameTimer);
+    walls->killTime();
+    score->killTime();
+    int myScore = getScore();
+    if(myScore<settings.value("score/"+QString::number(level)+"/4").toInt())
+        screen->exec();
+    else {
+        for(int i = 0; i >= 4; i++) {
+            int high = settings.value("score/"+QString::number(level)+"/"+QString::number(i)).toInt();
+            if( myScore == high) {
+//                screen->exec();
+                break;
+            }
+            else if (i==0 && myScore>high) {
+                settings.setValue("score/"+QString::number(level)+"/"+QString::number(i), myScore);
+                //show screen anouncing new high score
+//                screen->exec();
+                break;
+            }
+        }
+        screen->exec();
     }
 }
 

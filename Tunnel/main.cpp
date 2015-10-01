@@ -22,6 +22,9 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QCoreApplication::setOrganizationName("Obscure Systems");
+    QCoreApplication::setOrganizationDomain("obscure.systems");
+    QCoreApplication::setApplicationName("Tunnel");
     MainMenu m;
     m.show();
 
