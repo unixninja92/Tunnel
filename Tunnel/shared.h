@@ -47,7 +47,7 @@ typedef struct Share{
 }share;
 
 enum Level {
-    Easy,
+    Easy = 0,
     Medium,
     Hard,
     Insane
