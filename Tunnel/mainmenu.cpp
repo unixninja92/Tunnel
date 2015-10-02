@@ -60,7 +60,7 @@ void MainMenu::medMode()
 
 void MainMenu::hardMode()
 {
-    start(96, 4, 4, Hard);
+    start(96, 5, 5, Hard);
 }
 
 void MainMenu::insaneMode()

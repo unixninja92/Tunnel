@@ -39,6 +39,7 @@ TunnelW::~TunnelW()
 void TunnelW::createScene(int w, int h)
 {
     shared.scene = new QGraphicsScene(this);
+    shared.scene->setItemIndexMethod(QGraphicsScene::NoIndex);
     ui->view->setScene(shared.scene);
     shared.scene->setSceneRect(0,0,w-2,h-2);
     shared.scene->setBackgroundBrush(Qt::gray);
