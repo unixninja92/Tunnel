@@ -33,7 +33,7 @@ MovingPolygons::MovingPolygons(share s, double m, QObject *parent) :
         queue.append(generateStraightCenterPolyBlock(i-1));
     }
     count = 0;
-    wallTimer = startTimer(1000/(FRAMES_PER_SECOND*2));
+    wallTimer = startTimer(1000/(FRAMES_PER_SECOND));
     qsrand(time(NULL));
 
     move = m;

@@ -65,7 +65,7 @@ void MainMenu::hardMode()
 
 void MainMenu::insaneMode()
 {
-    start(112, 7, 5, Insane);
+    start(113, 7.5, 6, Insane);
 }
 
 /*
