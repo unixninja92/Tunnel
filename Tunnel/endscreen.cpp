@@ -35,20 +35,20 @@ EndScreen::EndScreen(share s, TunnelW* t, Level l, QWidget *parent) :
 void EndScreen::exec()
 {
     int scoreI = tun->getScore();
-//    std::stringstream ss;
-//    ss << scoreI;
-//    std::string s = ss.str();
-//    const char *c = s.c_str();
-    QString score = QString::number(scoreI);//(c);
+    QString score = QString::number(scoreI);
+    QString settingsString = "score/"+QString::number(level)+"/"
+            +QString::number(0);
     QString text;
-    QString high = settings.value("score/"+QString::number(level)+"/0").toString();
-    if(scoreI > settings.value("score/"+QString::number(level)+"/0").toInt()) {
-        text = "Congratulations!!! New High Score!\n" + endBox->text() + score +
+    QString high = settings.value(settingsString).toString();
+    if(scoreI > settings.value(settingsString).toInt()) {
+        text = "Congratulations!! New High Score!!\n" +
+                endBox->text() + score +
                 "\nPrevious High Score:" + high;
-        settings.setValue("score/"+QString::number(level)+"/"+QString::number(0), score);
+        settings.setValue(settingsString, score);
     }
     else{
-        text = "High Score: " + high + "\n" + endBox->text() + score;
+        text = "High Score: " + high + "\n" +
+                endBox->text() + score;
     }
     endBox->setText(text);
     endBox->exec();

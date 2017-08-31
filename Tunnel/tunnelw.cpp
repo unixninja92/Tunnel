@@ -136,26 +136,6 @@ void TunnelW::endGame()
     score->killTime();
     screen->exec();
 }
-//    int myScore = getScore();
-//    if(myScore<settings.value("score/"+QString::number(level)+"/4").toInt())
-//        screen->exec();
-//    else {
-//        for(int i = 0; i <= 4; i++) {
-//            int high = settings.value("score/"+QString::number(level)+"/"+QString::number(0)).toInt();
-//            if( myScore == high) {
-//                break;
-//            }
-//            else
-//                    if ( myScore>high) {//i==0 &&
-//                settings.setValue("score/"+QString::number(level)+"/"+QString::number(0), myScore);
-//                //rotate scores down
-                //show screen anouncing new high score
-//                break;
-//            }
-//        }
-//        settings.sync();
-//    }
-//}
 
 int TunnelW::getScore()
 {
