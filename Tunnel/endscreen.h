@@ -34,11 +34,12 @@ class EndScreen : public QWidget
 {
     Q_OBJECT
 public:
-    explicit EndScreen(share, TunnelW*, QWidget *parent=0);
+    explicit EndScreen(share, TunnelW*, Level, QWidget *parent=0);
     void exec();
 
 private:
     share shared;
+    Level level;
     QPointer<QMessageBox> endBox;
     QPointer<QAbstractButton> menuButton;
     QPointer<QAbstractButton> againButton;

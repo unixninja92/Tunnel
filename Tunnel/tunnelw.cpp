@@ -52,7 +52,7 @@ void TunnelW::startGame(Level l)
     createScene(ui->view->size().width(), ui->view->size().height());
     walls = new MovingPolygons(shared, pMove, shared.scene);
     score = new Score(shared, shared.scene);
-    screen = new EndScreen(shared, this);
+    screen = new EndScreen(shared, this, level);
     dot = shared.scene->addEllipse(
                     shared.scene->width()/2-10,//x
                     ((walls->getSize() - 4)
@@ -112,7 +112,7 @@ void TunnelW::keyReleaseEvent(QKeyEvent *event)
 }
 
 /*
- * Updates the screen every frame
+ * Updates the dot every frame
  */
 void TunnelW::timerEvent(QTimerEvent *)
 {
@@ -134,25 +134,28 @@ void TunnelW::endGame()
     killTimer(frameTimer);
     walls->killTime();
     score->killTime();
-    int myScore = getScore();
+    screen->exec();
+}
+//    int myScore = getScore();
 //    if(myScore<settings.value("score/"+QString::number(level)+"/4").toInt())
 //        screen->exec();
 //    else {
-        for(int i = 0; i <= 4; i++) {
-            int high = settings.value("score/"+QString::number(level)+"/"+QString::number(i)).toInt();
-            if( myScore == high) {
-                break;
-            }
-            else if (i==0 && myScore>high) {
-                settings.setValue("score/"+QString::number(level)+"/"+QString::number(i), myScore);
-                //rotate scores down
+//        for(int i = 0; i <= 4; i++) {
+//            int high = settings.value("score/"+QString::number(level)+"/"+QString::number(0)).toInt();
+//            if( myScore == high) {
+//                break;
+//            }
+//            else
+//                    if ( myScore>high) {//i==0 &&
+//                settings.setValue("score/"+QString::number(level)+"/"+QString::number(0), myScore);
+//                //rotate scores down
                 //show screen anouncing new high score
-                break;
-            }
-        }
-        screen->exec();
+//                break;
+//            }
+//        }
+//        settings.sync();
 //    }
-}
+//}
 
 int TunnelW::getScore()
 {

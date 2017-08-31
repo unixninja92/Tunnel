@@ -40,6 +40,7 @@ class MainMenu : public QMainWindow
 public:
     explicit MainMenu(QWidget *parent = 0);
     ~MainMenu();
+    void newTunnel();
 
 protected:
 

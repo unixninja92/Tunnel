@@ -86,6 +86,13 @@ void MainMenu::start(int pHeight, double pMove, double dMove, Level l)
         tunnel->restartGame();
 }
 
+void MainMenu::newTunnel()
+{
+    delete tunnel;
+    tunnel = new TunnelW();
+    tunnel->menu = this;
+}
+
 void MainMenu::settings()
 {
 
