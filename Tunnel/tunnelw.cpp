@@ -64,7 +64,7 @@ void TunnelW::startGame(Level l)
     Share::isPaused = false;
     moveLeft = false;
     moveRight = false;
-    frameTimer = startTimer(1000/FRAMES_PER_SECOND);
+    frameTimer = startTimer(600/FRAMES_PER_SECOND);
 }
 
 void TunnelW::restartGame()
