@@ -17,7 +17,8 @@
  */
 #include "mainmenu.h"
 #include "ui_mainmenu.h"
-#include "tunnelw.h"
+#include "tunnel.h"
+#include "tunnelwindow.h"
 
 MainMenu::MainMenu(QWidget *parent) :
     QMainWindow(parent),
@@ -39,7 +40,8 @@ MainMenu::MainMenu(QWidget *parent) :
     connect(score, SIGNAL(released()), this, SLOT(scores()));
     connect(setting, SIGNAL(released()), this, SLOT(settings()));
 
-    tunnel = new TunnelW();
+    tunnelWindow = new TunnelWindow();
+    tunnel = tunnelWindow->tunnel;
     tunnel->menu = this;
 }
 
@@ -75,21 +77,23 @@ void MainMenu::insaneMode()
  */
 void MainMenu::start(int pHeight, double pMove, double dMove, Level l)
 {
+    tunnelWindow->show();
     tunnel->show();
     this->hide();
     tunnel->setPHeight(pHeight);
     tunnel->setPMove(pMove);
     tunnel->setDMove(dMove);
     if(!tunnel->hasStarted())
-        tunnel->startGame(l);
+        tunnel->runGame(l);
     else
         tunnel->restartGame();
 }
 
 void MainMenu::newTunnel()
 {
-    delete tunnel;
-    tunnel = new TunnelW();
+    delete tunnelWindow;
+    tunnelWindow = new TunnelWindow();
+    tunnel = tunnelWindow->tunnel;
     tunnel->menu = this;
 }
 

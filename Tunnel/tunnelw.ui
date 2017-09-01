@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TunnelW</class>
- <widget class="QWidget" name="TunnelW">
+ <class>TunnelWindow</class>
+ <widget class="QWidget" name="TunnelWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -19,7 +19,13 @@
   <property name="windowTitle">
    <string>Tunnel</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <property name="windowOpacity">
+   <double>1.000000000000000</double>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <layout class="QGridLayout" name="verticalLayout">
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -33,48 +39,7 @@
     <number>0</number>
    </property>
    <item row="0" column="0">
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetMaximumSize</enum>
-     </property>
-     <item>
-      <widget class="QGraphicsView" name="view">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>200</width>
-         <height>400</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>16777215</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="verticalScrollBarPolicy">
-        <enum>Qt::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="horizontalScrollBarPolicy">
-        <enum>Qt::ScrollBarAlwaysOff</enum>
-       </property>
-       <property name="sizeAdjustPolicy">
-        <enum>QAbstractScrollArea::AdjustIgnored</enum>
-       </property>
-       <property name="resizeAnchor">
-        <enum>QGraphicsView::AnchorViewCenter</enum>
-       </property>
-       <property name="viewportUpdateMode">
-        <enum>QGraphicsView::MinimalViewportUpdate</enum>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QOpenGLWidget" name="Tunnel"/>
    </item>
   </layout>
  </widget>

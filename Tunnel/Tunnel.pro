@@ -17,21 +17,26 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
-        tunnelw.cpp \
     score.cpp \
     movingpolygons.cpp \
     endscreen.cpp \
-    mainmenu.cpp
+    mainmenu.cpp \
+    tunnel.cpp \
+    tunnelwindow.cpp
 
-HEADERS  += tunnelw.h \
+HEADERS  += \
     score.h \
     movingpolygons.h \
     shared.h \
     endscreen.h \
-    mainmenu.h
+    mainmenu.h \
+    tunnel.h \
+    tunnelwindow.h
 
-FORMS    += tunnelw.ui \
-    mainmenu.ui
+FORMS    += \
+    mainmenu.ui \
+    tunnelw.ui \
+    tunnelwindow.ui
 
 #DISTFILES += \
 #    android/gradle/wrapper/gradle-wrapper.jar \

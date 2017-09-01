@@ -17,23 +17,27 @@
  */
 #include "movingpolygons.h"
 #include <QDebug>
+#include <QString>
 #include <math.h>
 #include <ctime>
+#include <QPainter>
+#include <QOpenGLPaintDevice>
 
-MovingPolygons::MovingPolygons(share s, double m, QObject *parent) :
+MovingPolygons::MovingPolygons(share s, double m, int h, int w, QObject *parent) :
     QObject(parent)
 {
     shared = s;
-    sceneWidth = shared.scene->width();
+    sceneWidth = w;
     sceneMidWidth = sceneWidth/2;
-    sceneHeight = shared.scene->height();
+    sceneHeight = h;
     size = sceneHeight/shared.pHeight+3;
+    qDebug() << "DAT SIZE" << size;
     queue = *new QList<polygonBlock>();
     for(int i = 0; i < size; i++){
         queue.append(generateStraightCenterPolyBlock(i-1));
     }
     count = 0;
-    wallTimer = startTimer(1000/(FRAMES_PER_SECOND));
+//    wallTimer = startTimer(1000/(FRAMES_PER_SECOND));
     qsrand(time(NULL));
 
     move = m;
@@ -111,12 +115,15 @@ polygonBlock MovingPolygons::generatePolygonBlock(QPolygonF left,
                                                   QPolygonF right)
 {
     polygonBlock newBlock;
+    newBlock.left = new QPainterPath();
+    newBlock.right = new QPainterPath();
+    newBlock.left->addPolygon(left);
+    newBlock.right->addPolygon(right);
+//    newBlock.left = shared.scene->addPolygon(left);
+//    newBlock.left->setBrush(Qt::black);
 
-    newBlock.left = shared.scene->addPolygon(left);
-    newBlock.left->setBrush(Qt::black);
-
-    newBlock.right = shared.scene->addPolygon(right);
-    newBlock.right->setBrush(Qt::black);
+//    newBlock.right = shared.scene->addPolygon(right);
+//    newBlock.right->setBrush(Qt::black);
 
     return newBlock;
 }
@@ -142,30 +149,36 @@ int MovingPolygons::getSize()
     return size;
 }
 
-void MovingPolygons::tick()
+void MovingPolygons::tick(QPainter* painter)
 {
-    for(int i = 0; i<size; i++){
-        queue.at(i).left->moveBy(0,move);
-        queue.at(i).right->moveBy(0,move);
+    for(int i = 0; i<queue.size(); i++){
+        queue.at(i).left->translate(0,move);
+        painter->drawPath(*queue.at(i).left);
+        queue.at(i).right->translate(0,move);
+        painter->drawPath(*queue.at(i).right);
     }
+    qDebug() << "done for";
     count++;
-    if(count%((int)floor(shared.pHeight/move))==0)
+    if(count%((int)floor(shared.pHeight/move))==0){
         rotate();
+        painter->drawPath(*queue.at(0).left);
+        painter->drawPath(*queue.at(0).right);
+    }
 }
 
-void MovingPolygons::timerEvent(QTimerEvent *event)
-{
-    if(!Share::isPaused) {
-        if(event->timerId()==wallTimer){
-            for(int i = 0; i<size; i++){
-                queue.at(i).left->moveBy(0,move);
-                queue.at(i).right->moveBy(0,move);
-            }
-            count++;
-            if(count%((int)floor(shared.pHeight/move))==0) rotate();
-        }
-    }
-}
+//void MovingPolygons::timerEvent(QTimerEvent *event)
+//{
+//    if(!Share::isPaused) {
+//        if(event->timerId()==wallTimer){
+//            for(int i = 0; i<size; i++){
+//                queue.at(i).left->moveBy(0,move);
+//                queue.at(i).right->moveBy(0,move);
+//            }
+//            count++;
+//            if(count%((int)floor(shared.pHeight/move))==0) rotate();
+//        }
+//    }
+//}
 
 void MovingPolygons::killTime()
 {

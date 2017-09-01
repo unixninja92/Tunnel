@@ -25,26 +25,27 @@
 #include <shared.h>
 
 typedef struct polygonBlock {
-    QGraphicsPolygonItem* left;
-    QGraphicsPolygonItem* right;
+    QPainterPath* left;
+    QPainterPath* right;
 }polygonBlock;
 
 class MovingPolygons : public QObject
 {
     Q_OBJECT
 public:
-    explicit MovingPolygons(share, double, QObject *parent = 0);
+    explicit MovingPolygons(share, double, int heightOfScreen,
+                            int widthOfScreen, QObject *parent = 0);
     polygonBlock generateStraightCenterPolyBlock(int pos = -1);
     polygonBlock generateRandomPolyBlock();
     polygonBlock getCurrentBlock();
     polygonBlock getNextBlock();
     int getSize();
     void rotate();
-    void tick();
+    void tick(QPainter*);
     void killTime();
 
 protected:
-    void timerEvent(QTimerEvent *event);
+//    void timerEvent(QTimerEvent *event);
 
 private:
     share shared;

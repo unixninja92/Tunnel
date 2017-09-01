@@ -22,10 +22,10 @@ Score::Score(share s, QObject *parent) :
 {
     shared = s;
     score = 0;
-    scoreKeeper = shared.scene->addSimpleText(" ");
-    scoreKeeper->setPos(shared.scene->width()-30, 20);
-    scoreKeeper->setBrush(Qt::white);
-    scoreKeeper->setZValue(1);
+//    scoreKeeper = shared.scene->addSimpleText(" ");
+//    scoreKeeper->setPos(shared.scene->width()-30, 20);
+//    scoreKeeper->setBrush(Qt::white);
+//    scoreKeeper->setZValue(1);
     updateScore();
     scoreTimer = startTimer(1000);
 }

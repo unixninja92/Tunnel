@@ -24,17 +24,18 @@
 #include <movingpolygons.h>
 #include <score.h>
 #include <endscreen.h>
+#include <QOpenGLPaintDevice>
 
 class MainMenu;
 
-class TunnelW : public QOpenGLWidget
+class Tunnel : public QOpenGLWidget
 {
     Q_OBJECT
 
 public:
-    explicit TunnelW(QOpenGLWidget *parent = 0);
-    ~TunnelW();
-    void startGame(Level level);
+    explicit Tunnel(QOpenGLWidget *parent = 0);
+//    void startGame(Level level);
+    void runGame(Level level);
     void restartGame();
     void cleanShared();
     int getScore();
@@ -49,13 +50,13 @@ public:
 protected:
     void keyPressEvent(QKeyEvent *);
     void keyReleaseEvent(QKeyEvent *);
-    void timerEvent(QTimerEvent *);
+//    void timerEvent(QTimerEvent *);
 
 private:
-    Ui::TunnelW *ui;
+    QOpenGLPaintDevice *paintDevice;
     QPointer<MovingPolygons> walls;
     QPointer<Score> score;
-    QGraphicsEllipseItem* dot;
+    QPainterPath* dot;
     QPointer<EndScreen> screen;
     QSettings settings;
     void createScene(int w, int h);

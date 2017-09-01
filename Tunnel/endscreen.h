@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QWidget>
 #include <shared.h>
-#include <tunnelw.h>
+#include <tunnel.h>
 
 /*
  *  EndScreen is a popup box that apears when the user has died/crashed into a
@@ -34,7 +34,7 @@ class EndScreen : public QWidget
 {
     Q_OBJECT
 public:
-    explicit EndScreen(share, TunnelW*, Level, QWidget *parent=0);
+    explicit EndScreen(share, Tunnel*, Level, QWidget *parent=0);
     void exec();
 
 private:
@@ -43,7 +43,7 @@ private:
     QPointer<QMessageBox> endBox;
     QPointer<QAbstractButton> menuButton;
     QPointer<QAbstractButton> againButton;
-    QPointer<TunnelW> tun;
+    QPointer<Tunnel> tun;
     QSettings settings;
 };
 

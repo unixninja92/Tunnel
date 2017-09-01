@@ -19,7 +19,7 @@
 #include "mainmenu.h"
 #include <sstream>
 
-EndScreen::EndScreen(share s, TunnelW* t, Level l, QWidget *parent) :
+EndScreen::EndScreen(share s, Tunnel* t, Level l, QWidget *parent) :
     QWidget(parent)
 {
     shared = s;

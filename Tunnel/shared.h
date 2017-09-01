@@ -38,10 +38,11 @@
 class MovingPolygons;
 class Score;
 class EndScreen;
-class TunnelW;
+class Tunnel;
+class TunnelWindow;
 
 typedef struct Share{
-    QPointer<QGraphicsScene> scene;
+//    QPointer<QGraphicsScene> scene;
     int pHeight;
     static bool isPaused;
 }share;
@@ -55,7 +56,7 @@ enum Level {
 };
 
 namespace Ui {
-class TunnelW;
+class TunnelWindow;
 }
 
 #endif // SHARED

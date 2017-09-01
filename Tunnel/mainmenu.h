@@ -22,7 +22,7 @@
 
 #include <QMainWindow>
 #include <QPushButton>
-#include <tunnelw.h>
+#include <tunnel.h>
 
 namespace Ui {
 class MainMenu;
@@ -54,7 +54,8 @@ private slots:
 
 private:
     Ui::MainMenu *ui;
-    TunnelW *tunnel;
+    TunnelWindow *tunnelWindow;
+    Tunnel *tunnel;
     QPushButton *easy;
     QPushButton *med;
     QPushButton *hard;
